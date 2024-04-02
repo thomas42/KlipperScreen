@@ -223,7 +223,6 @@ class KlippyGtk:
             button.get_style_context().add_class(style)
             format_label(button, 2)
 
-
         dialog.connect("response", self.screen.reset_screensaver_timeout)
         dialog.connect("response", callback, *args)
         dialog.get_style_context().add_class("dialog")

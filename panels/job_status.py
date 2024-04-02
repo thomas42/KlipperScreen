@@ -595,8 +595,6 @@ class Panel(ScreenPanel):
     def update_time_left(self):
         total_duration = float(self._printer.get_stat('print_stats', 'total_duration'))
         print_duration = float(self._printer.get_stat('print_stats', 'print_duration'))
-        if not self.file_metadata.get('filament_total'):  # No-extrusion
-            print_duration = total_duration
         fila_used = float(self._printer.get_stat('print_stats', 'filament_used'))
         if "gcode_start_byte" in self.file_metadata:
             progress = (max(self._printer.get_stat('virtual_sdcard', 'file_position') -
@@ -614,6 +612,10 @@ class Panel(ScreenPanel):
             spdcomp = sqrt(self.speed_factor)
             slicer_time = ((self.file_metadata['estimated_time']) / spdcomp)
             self.labels["slicer_time"].set_label(self.format_time(slicer_time))
+            if print_duration < 1:
+                print_duration = slicer_time * progress
+        elif print_duration < 1:  # No-extrusion
+            print_duration = total_duration
 
         if 'filament_total' in self.file_metadata and self.file_metadata['filament_total'] >= fila_used > 0:
             filament_time = (print_duration / (fila_used / self.file_metadata['filament_total']))
@@ -629,7 +631,7 @@ class Panel(ScreenPanel):
         elif timeleft_type == "slicer":
             estimated = slicer_time
         elif estimated < 1:  # Auto
-            if slicer_time > 1:
+            if print_duration < slicer_time > 1:
                 if progress < 0.15:
                     # At the begining file and filament are innacurate
                     estimated = slicer_time
@@ -639,7 +641,7 @@ class Panel(ScreenPanel):
                 elif file_time > 1:
                     # Weighted arithmetic mean (Slicer is the most accurate)
                     estimated = (slicer_time * 2 + file_time) / 3
-            elif filament_time > 1 and file_time > 1:
+            elif print_duration < filament_time > 1 and file_time > 1:
                 estimated = (filament_time + file_time) / 2
             elif file_time > 1:
                 estimated = file_time

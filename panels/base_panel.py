@@ -21,6 +21,8 @@ class BasePanel(ScreenPanel):
         self.titlebar_items = []
         self.titlebar_name_type = None
         self.current_extruder = None
+        self.last_usage_report = datetime.now()
+        self.usage_report = 0
         # Action bar buttons
         abscale = self.bts * 1.1
         self.control['back'] = self._gtk.Button('back', scale=abscale)
@@ -81,7 +83,6 @@ class BasePanel(ScreenPanel):
         self.control['temp_box'] = Gtk.Box(spacing=10)
 
         self.titlelbl = Gtk.Label(hexpand=True, halign=Gtk.Align.CENTER, ellipsize=Pango.EllipsizeMode.END)
-        self.set_title(title)
 
         self.control['time'] = Gtk.Label(label="00:00 AM")
         self.control['time_box'] = Gtk.Box(halign=Gtk.Align.END)
@@ -92,6 +93,7 @@ class BasePanel(ScreenPanel):
         self.titlebar.add(self.control['temp_box'])
         self.titlebar.add(self.titlelbl)
         self.titlebar.add(self.control['time_box'])
+        self.set_title(title)
 
         # Main layout
         self.main_grid = Gtk.Grid()
@@ -206,6 +208,30 @@ class BasePanel(ScreenPanel):
             self._screen._menu_go_back()
 
     def process_update(self, action, data):
+        if action == "notify_proc_stat_update":
+            cpu = data["system_cpu_usage"]["cpu"]
+            memory = (data["system_memory"]["used"] / data["system_memory"]["total"]) * 100
+            error = "message_popup_error"
+            ctx = self.titlebar.get_style_context()
+            msg = f"CPU: {cpu:2.0f}%    RAM: {memory:2.0f}%"
+            if cpu > 80 or memory > 85:
+                if self.usage_report < 3:
+                    self.usage_report += 1
+                    return
+                self.last_usage_report = datetime.now()
+                if not ctx.has_class(error):
+                    ctx.add_class(error)
+                self._screen.log_notification(f"{self._screen.connecting_to_printer}: {msg}", 2)
+                self.titlelbl.set_label(msg)
+            elif ctx.has_class(error):
+                if (datetime.now() - self.last_usage_report).seconds < 5:
+                    self.titlelbl.set_label(msg)
+                    return
+                self.usage_report = 0
+                ctx.remove_class(error)
+                self.titlelbl.set_label(f"{self._screen.connecting_to_printer}")
+            return
+
         if action == "notify_update_response":
             if self.update_dialog is None:
                 self.show_update_dialog()
@@ -224,6 +250,7 @@ class BasePanel(ScreenPanel):
                         self._screen.updating = False
                         for dialog in self._screen.dialogs:
                             self._gtk.remove_dialog(dialog)
+            return
 
         if action != "notify_status_update" or self._screen.printer is None:
             return
@@ -270,6 +297,7 @@ class BasePanel(ScreenPanel):
         self.control['printer_select'].set_visible(show)
 
     def set_title(self, title):
+        self.titlebar.get_style_context().remove_class("message_popup_error")
         if not title:
             self.titlelbl.set_label(f"{self._screen.connecting_to_printer}")
             return
