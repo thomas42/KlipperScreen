@@ -90,11 +90,11 @@ panel: power
 ```
 ![Power](img/panels/power.png)
 
-### Print
+### Gcodes / Print
 ```py
-panel: print
+panel: gcodes
 ```
-![Print Panel](img/panels/print.png)
+![Gcodes Panel](img/panels/gcodes.png)
 
 ### Retraction
 ```py
@@ -108,12 +108,6 @@ panel: settings
 ```
 ![Settings](img/panels/settings.png)
 
-### System
-```py
-panel: system
-```
-![System Panel](img/panels/system.png)
-
 ### Spoolman
 ```py
 panel: spoolman
@@ -125,6 +119,12 @@ panel: spoolman
 panel: temperature
 ```
 [![Temperature](img/panels/temperature.png)](Panels/Temperature.md)
+
+### Updater
+```py
+panel: updater
+```
+![Updater Panel](img/panels/updater.png)
 
 ### [Z Calibrate](Panels/Zcalibrate.md)
 ```py

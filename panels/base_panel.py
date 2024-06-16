@@ -12,7 +12,7 @@ from ks_includes.screen_panel import ScreenPanel
 
 
 class BasePanel(ScreenPanel):
-    def __init__(self, screen, title):
+    def __init__(self, screen, title=None):
         super().__init__(screen, title)
         self.current_panel = None
         self.time_min = -1
@@ -35,9 +35,7 @@ class BasePanel(ScreenPanel):
         self.control['estop'].connect("clicked", self.emergency_stop)
         self.control['estop'].set_no_show_all(True)
         self.shutdown = {
-            "name": None,
             "panel": "shutdown",
-            "icon": "shutdown",
         }
         self.control['shutdown'] = self._gtk.Button('shutdown', scale=abscale)
         self.control['shutdown'].connect("clicked", self.menu_item_clicked, self.shutdown)
@@ -47,7 +45,6 @@ class BasePanel(ScreenPanel):
         self.control['printer_select'].set_no_show_all(True)
 
         self.shorcut = {
-            "name": "Macros",
             "panel": "gcode_macros",
             "icon": "custom-script",
         }
@@ -110,6 +107,16 @@ class BasePanel(ScreenPanel):
             self.main_grid.attach(self.content, 1, 1, 1, 1)
 
         self.update_time()
+
+    def reload_icons(self):
+        button: Gtk.Button
+        for button in self.action_bar.get_children():
+            img = button.get_image()
+            name = button.get_name()
+            pixbuf = img.get_pixbuf()
+            width = pixbuf.get_width()
+            height = pixbuf.get_height()
+            button.set_image(self._gtk.Image(name, width, height))
 
     def show_heaters(self, show=True):
         try:
@@ -255,8 +262,8 @@ class BasePanel(ScreenPanel):
         if action != "notify_status_update" or self._screen.printer is None:
             return
         for device in self._printer.get_temp_devices():
-            temp = self._printer.get_dev_stat(device, "temperature")
-            if temp is not None and device in self.labels:
+            temp = self._printer.get_stat(device, "temperature")
+            if temp and device in self.labels:
                 name = ""
                 if not (device.startswith("extruder") or device.startswith("heater_bed")):
                     if self.titlebar_name_type == "full":
@@ -265,7 +272,7 @@ class BasePanel(ScreenPanel):
                     elif self.titlebar_name_type == "short":
                         name = device.split()[1] if len(device.split()) > 1 else device
                         name = f"{name[:1].upper()}: "
-                self.labels[device].set_label(f"{name}{int(temp)}°")
+                self.labels[device].set_label(f"{name}{temp:.0f}°")
 
         if (self.current_extruder and 'toolhead' in data and 'extruder' in data['toolhead']
                 and data["toolhead"]["extruder"] != self.current_extruder):
@@ -288,13 +295,16 @@ class BasePanel(ScreenPanel):
             show
             and self._config.get_main_config().getboolean('side_macro_shortcut', True)
             and self._printer.get_printer_status_data()["printer"]["gcode_macros"]["count"] > 0
+            and self._screen._cur_panels[-1] != 'printer_select'
         )
         self.control['shortcut'].set_visible(show)
         self.set_control_sensitive(self._screen._cur_panels[-1] != self.shorcut['panel'])
         self.set_control_sensitive(self._screen._cur_panels[-1] != self.shutdown['panel'], control='shutdown')
 
     def show_printer_select(self, show=True):
-        self.control['printer_select'].set_visible(show)
+        self.control['printer_select'].set_visible(
+            show and 'printer_select' not in self._screen._cur_panels
+        )
 
     def set_title(self, title):
         self.titlebar.get_style_context().remove_class("message_popup_error")

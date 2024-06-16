@@ -2,16 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
-"PO-Revision-Date: \n"
-"Last-Translator: boyon\n"
-"Language-Team: \n"
-"Language: ja\n"
+"POT-Creation-Date: 2024-06-02 08:38-0300\n"
+"PO-Revision-Date: 2024-04-13 16:48+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/ja/>\n"
+"Language: jp\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.1\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -64,6 +65,9 @@ msgstr "対象を除外しますか？"
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "緊急停止しますか？"
 
+msgid "Are you sure you want to stop the calibration?"
+msgstr ""
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "印刷を中断しますか？"
 
@@ -75,6 +79,9 @@ msgstr "システムを再起動しますか？"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "システムをシャットダウンしますか？"
+
+msgid "Asks for confirmation before stopping"
+msgstr ""
 
 msgid "Auto"
 msgstr "自動"
@@ -97,8 +104,8 @@ msgstr "ベッドレベル"
 msgid "Bed Mesh"
 msgstr "ベッドメッシュ"
 
-msgid "Bed screw configuration:"
-msgstr "ベッドスクリュー設定:"
+msgid "Both"
+msgstr ""
 
 msgid "Calibrate"
 msgstr "校正"
@@ -130,6 +137,12 @@ msgstr "キャンセル中"
 msgid "Cannot connect to Moonraker"
 msgstr "Moonrakerに接続できません"
 
+msgid "Changes how the interface looks"
+msgstr ""
+
+msgid "Changes how the time remaining is calculated"
+msgstr ""
+
 msgid "Channel"
 msgstr "チャンネル"
 
@@ -145,6 +158,9 @@ msgstr "クリア"
 msgid "Close"
 msgstr "終了"
 
+msgid "Close messages after a timeout"
+msgstr ""
+
 msgid "Complete"
 msgstr "完了"
 
@@ -154,15 +170,27 @@ msgstr "緊急停止時に確認する"
 msgid "Connected"
 msgstr "接続済み"
 
+msgid "Connecting"
+msgstr ""
+
 #, python-format
 msgid "Connecting to %s"
 msgstr "%s へ接続中・・・"
+
+msgid "Connection failed"
+msgstr ""
 
 msgid "Console"
 msgstr "コンソール"
 
 msgid "Cooldown"
 msgstr "クールダウン"
+
+msgid "Couldn't add network"
+msgstr ""
+
+msgid "Current percentage and graph line"
+msgstr ""
 
 msgid "DPMS has failed to load and has been disabled"
 msgstr ""
@@ -176,14 +204,24 @@ msgstr ""
 msgid "Delete File?"
 msgstr "ファイルを削除しますか？"
 
-msgid "Deselect"
-msgstr "選択解除"
-
 msgid "Disable Motors"
 msgstr "モーターの無効化"
 
+msgid "Disable for 12hs with am / pm"
+msgstr ""
+
+msgid "Disconnect"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "距離(mm)"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr ""
+
+msgid "Do you want to let KlipperScreen try to solve the issue?"
+msgstr ""
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -192,7 +230,10 @@ msgstr "元に戻しますか %s ？"
 msgid "Elapsed:"
 msgstr "経過時間:"
 
-msgid "Ended official support in June 2023"
+msgid "Emergency Stop"
+msgstr ""
+
+msgid "Enable screen power management"
 msgstr ""
 
 msgid "Error"
@@ -208,6 +249,12 @@ msgid "Error setting active spool"
 msgstr ""
 
 msgid "Error trying to fetch spools"
+msgstr ""
+
+msgid "Error: Couldn't get a position to probe"
+msgstr ""
+
+msgid "Estimated Time"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -231,11 +278,20 @@ msgstr "吐出＋"
 msgid "Extrusion -"
 msgstr "吐出－"
 
+msgid "Failed to delete connection"
+msgstr ""
+
+msgid "Failed to initialize"
+msgstr ""
+
 msgid "Failed, adjust position first"
 msgstr "失敗時は最初に位置を調整する"
 
 msgid "Fan"
 msgstr "ファン"
+
+msgid "Filament"
+msgstr ""
 
 msgid "Filament Used"
 msgstr "使用済フィラメント"
@@ -279,17 +335,23 @@ msgstr "フローレート:"
 msgid "Font Size"
 msgstr "フォントサイズ"
 
+msgid "Forget"
+msgstr ""
+
 msgid "Full Update"
 msgstr "フルアップデート"
+
+msgid "Gcodes"
+msgstr ""
+
+msgid "Getting IP address"
+msgstr ""
 
 msgid "Go Back"
 msgstr "戻る"
 
 msgid "Height:"
 msgstr "高さ:"
-
-msgid "Hidden"
-msgstr "非表示"
 
 msgid "Hide"
 msgstr "隠す"
@@ -339,6 +401,12 @@ msgstr ""
 msgid "Input Shaper"
 msgstr ""
 
+msgid "Insufficient priviledges detected"
+msgstr ""
+
+msgid "Insufficient privileges"
+msgstr ""
+
 msgid "Interface"
 msgstr "インターフェース"
 
@@ -346,6 +414,9 @@ msgid "Invalid"
 msgstr "不正"
 
 msgid "Invalid password"
+msgstr ""
+
+msgid "Inversely affects the icon size"
 msgstr ""
 
 msgid "Invert X"
@@ -358,6 +429,9 @@ msgid "Invert Z"
 msgstr "X軸を反対にする"
 
 msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
+
+msgid "It's possible that the configuration is not correct"
 msgstr ""
 
 msgid "Klipper Restart"
@@ -378,9 +452,6 @@ msgstr "Klipperは起動中です"
 msgid "Klipper will reboot"
 msgstr "Klipperは再起動します"
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
-
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -392,6 +463,9 @@ msgid "Large"
 msgstr "大"
 
 msgid "Last Used"
+msgstr ""
+
+msgid "Layer Height"
 msgstr ""
 
 msgid "Layer:"
@@ -436,11 +510,11 @@ msgstr "最大"
 msgid "Max Acceleration"
 msgstr "最大加速度"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "減速時の最大加速度"
-
 msgid "Max Velocity"
 msgstr "最大速度"
+
+msgid "Max:"
+msgstr ""
 
 msgid "Maximum"
 msgstr "最大"
@@ -457,11 +531,20 @@ msgstr "Y軸を計測する"
 msgid "Medium"
 msgstr "中"
 
+msgid "Memory"
+msgstr ""
+
 msgid "Menu"
 msgstr "メニュー"
 
 msgid "Mesh calibrate"
 msgstr "メッシュ較正"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
+
+msgid "Minimum:"
+msgstr ""
 
 msgid "Modified"
 msgstr "変更"
@@ -484,6 +567,15 @@ msgstr "名称"
 msgid "Network"
 msgstr "ネットワーク"
 
+msgid "Network connected"
+msgstr ""
+
+msgid "Network disconnected"
+msgstr ""
+
+msgid "Network not found"
+msgstr ""
+
 msgid "Never"
 msgstr "未"
 
@@ -499,9 +591,7 @@ msgstr ""
 msgid "No wireless interface has been found"
 msgstr ""
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
+msgid "Not all screens support this"
 msgstr ""
 
 msgid "Not working or not configured"
@@ -514,6 +604,9 @@ msgid "Notification log empty"
 msgstr ""
 
 msgid "Notifications"
+msgstr ""
+
+msgid "Only for the move panel"
 msgstr ""
 
 #, python-format
@@ -548,6 +641,9 @@ msgstr "Pins"
 msgid "Please recompile and flash the micro-controller."
 msgstr "マイクロコントローラーをリコンパイル＆フラッシュしてください"
 
+msgid "Please wait"
+msgstr ""
+
 msgid "Power"
 msgstr "電源"
 
@@ -557,14 +653,14 @@ msgstr "プリンター電源"
 msgid "Pressure Advance:"
 msgstr ""
 
+msgid "Pressure Advance"
+msgstr ""
+
 msgid "Print"
 msgstr "印刷"
 
 msgid "Print Control"
 msgstr "印刷制御"
-
-msgid "Print Time"
-msgstr "印刷時間"
 
 msgid "Printer"
 msgstr "プリンター"
@@ -608,6 +704,9 @@ msgstr ""
 msgid "Refresh"
 msgstr "最新表示"
 
+msgid "Remove network"
+msgstr ""
+
 msgid "Rename/Move:"
 msgstr ""
 
@@ -634,6 +733,9 @@ msgstr "再試行"
 
 msgid "Retrying"
 msgstr "再試行中"
+
+msgid "Rotation invalid"
+msgstr ""
 
 msgid "Save"
 msgstr "保存"
@@ -663,7 +765,7 @@ msgstr ""
 msgid "Screws Adjust"
 msgstr ""
 
-msgid "Select"
+msgid "Screws not used:"
 msgstr ""
 
 msgid "Send"
@@ -682,6 +784,9 @@ msgid "Show Heater Power"
 msgstr ""
 
 msgid "Show Scrollbars Buttons"
+msgstr ""
+
+msgid "Show only devices that are able to be set"
 msgstr ""
 
 msgid "Shutdown"
@@ -720,14 +825,14 @@ msgstr ""
 msgid "Start"
 msgstr "開始"
 
-msgid "Starting WiFi Association"
-msgstr "Wifi接続開始中"
-
 msgid "Starting recovery for"
 msgstr "回復中"
 
 msgid "Starting update for"
 msgstr "更新中"
+
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
 
 msgid "System"
 msgstr "システム"
@@ -738,11 +843,29 @@ msgstr "システムの再起動"
 msgid "System Shutdown"
 msgstr "システムのシャットダウン"
 
+msgid "System:"
+msgstr ""
+
 msgid "Temp (°C)"
 msgstr "温度 (°C)"
 
 msgid "Temperature"
 msgstr "温度"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr ""
+
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "This will affect screw positions and mesh graph"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off during printing"
+msgstr ""
 
 msgid "Total:"
 msgstr "全体:"
@@ -750,8 +873,8 @@ msgstr "全体:"
 msgid "Unknown Heater"
 msgstr "無効なヒーター"
 
-msgid "Unknown screw position"
-msgstr "無効なのスクリュー位置"
+msgid "Unknown security type"
+msgstr ""
 
 msgid "Unload"
 msgstr "アンロード"
@@ -774,7 +897,7 @@ msgstr "更新中"
 msgid "Uploaded"
 msgstr "アップロード済"
 
-msgid "Warning"
+msgid "Useful for un-responsive touchscreens"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
@@ -805,8 +928,9 @@ msgid "commit"
 msgid_plural "commits"
 msgstr[0] ""
 
-msgid "dBm"
-msgstr ""
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
 
 msgid "hour"
 msgid_plural "hours"
@@ -833,6 +957,31 @@ msgstr ""
 
 msgid "mm³/s"
 msgstr ""
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+
+#~ msgid "Hidden"
+#~ msgstr "非表示"
+
+#~ msgid "Print Time"
+#~ msgstr "印刷時間"
+
+#~ msgid "Starting WiFi Association"
+#~ msgstr "Wifi接続開始中"
+
+#~ msgid "Deselect"
+#~ msgstr "選択解除"
+
+#~ msgid "Bed screw configuration:"
+#~ msgstr "ベッドスクリュー設定:"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "無効なのスクリュー位置"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "減速時の最大加速度"
 
 #~ msgid "Continue"
 #~ msgstr "継続"

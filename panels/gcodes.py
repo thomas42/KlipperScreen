@@ -21,6 +21,7 @@ def format_label(widget):
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
+        title = title or (_("Print") if self._printer.extrudercount > 0 else _("Gcodes"))
         super().__init__(screen, title)
         sortdir = self._config.get_main_config().get("print_sort_dir", "name_asc")
         sortdir = sortdir.split('_')
@@ -71,7 +72,7 @@ class Panel(ScreenPanel):
         logging.info(f"Thumbsize: {self.thumbsize}")
 
         self.flowbox = Gtk.FlowBox(selection_mode=Gtk.SelectionMode.NONE,
-                                   column_spacing=0, row_spacing=0, homogeneous=True)
+                                   column_spacing=0, row_spacing=0)
         list_mode = self._config.get_main_config().get("print_view", 'thumbs')
         logging.info(list_mode)
         self.list_mode = list_mode == 'list'
@@ -167,7 +168,8 @@ class Panel(ScreenPanel):
                 image_args = (path, icon, self.thumbsize / 2, True, "file")
                 delete.connect("clicked", self.confirm_delete_file, f"gcodes/{path}")
                 rename.connect("clicked", self.show_rename, f"gcodes/{path}")
-                action = self._gtk.Button("print", style="color3")
+                action_icon = "printer" if self._printer.extrudercount > 0 else "load"
+                action = self._gtk.Button(action_icon, style="color3")
                 action.connect("clicked", self.confirm_print, path)
                 action.set_hexpand(False)
                 action.set_vexpand(False)
@@ -305,25 +307,33 @@ class Panel(ScreenPanel):
         return b.get_date() - a.get_date() if reverse else a.get_date() - b.get_date()
 
     def confirm_print(self, widget, filename):
+        action = _("Print") if self._printer.extrudercount > 0 else _("Start")
 
         buttons = [
-            {"name": _("Print"), "response": Gtk.ResponseType.OK},
+            {"name": action, "response": Gtk.ResponseType.OK},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL, "style": 'dialog-error'}
         ]
 
         label = Gtk.Label(hexpand=True, vexpand=True, wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
         label.set_markup(f"<b>{filename}</b>\n")
 
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        box.add(label)
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
+        box.pack_start(label, False, False, 0)
 
-        height = (self._screen.height - self._gtk.dialog_buttons_height - self._gtk.font_size) * .75
+        height = (self._screen.height - self._gtk.dialog_buttons_height - self._gtk.font_size * 5) * .75
         pixbuf = self.get_file_image(filename, self._screen.width * .9, height)
         if pixbuf is not None:
             image = Gtk.Image.new_from_pixbuf(pixbuf)
-            box.add(image)
+            box.pack_start(image, True, True, 0)
 
-        self._gtk.Dialog(_("Print") + f' {filename}', buttons, box, self.confirm_print_response, filename)
+        fileinfo = self._screen.files.get_file_info(filename)
+        if "estimated_time" in fileinfo:
+            box.pack_start(
+                Gtk.Label(label=_("Estimated Time") + f': {self.format_time(fileinfo["estimated_time"])}'),
+                False, False, 2
+            )
+
+        self._gtk.Dialog(f'{action} {filename}', buttons, box, self.confirm_print_response, filename)
 
     def confirm_print_response(self, dialog, response_id, filename):
         self._gtk.remove_dialog(dialog)
@@ -343,8 +353,14 @@ class Panel(ScreenPanel):
             info += _("Size") + f': <b>{self.format_size(item["size"])}</b>\n'
         if 'filename' in item:
             fileinfo = self._screen.files.get_file_info(path)
+            if "layer_height" in fileinfo:
+                info += _("Layer Height") + f': <b>{fileinfo["layer_height"]}</b>' + _("mm") + '\n'
+            if "filament_type" in fileinfo:
+                info += _("Filament") + f': <b>{fileinfo["filament_type"]}</b>\n'
+            if "filament_name" in fileinfo:
+                info += f'<b>{fileinfo["filament_name"]}</b>\n'
             if "estimated_time" in fileinfo:
-                info += _("Print Time") + f': <b>{self.format_time(fileinfo["estimated_time"])}</b>'
+                info += _("Estimated Time") + f': <b>{self.format_time(fileinfo["estimated_time"])}</b>'
         return info
 
     def load_files(self, result, method, params):

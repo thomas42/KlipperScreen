@@ -5,25 +5,50 @@ import math
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gdk, Gtk
+from gi.repository import Gdk, Gtk, GLib
 from cairo import Context as cairoContext
 
 
 class HeaterGraph(Gtk.DrawingArea):
-    def __init__(self, screen, printer, font_size):
+    def __init__(self, screen, printer, font_size, fullscreen=False, store=None):
         super().__init__()
+        self._gtk = screen.gtk
         self.set_hexpand(True)
         self.set_vexpand(True)
         self.get_style_context().add_class('heatergraph')
         self._screen = screen
         self.printer = printer
-        self.store = {}
+        self.store = {} if store is None else store
         self.connect('draw', self.draw_graph)
         self.add_events(Gdk.EventMask.TOUCH_MASK)
         self.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
-        self.connect('touch-event', self.event_cb)
+        self.connect('button_press_event', screen.reset_screensaver_timeout)
         self.connect('button_press_event', self.event_cb)
         self.font_size = round(font_size * 0.75)
+        self.fullscreen = fullscreen
+        if fullscreen:
+            GLib.timeout_add_seconds(1, self.update_graph)
+        self.fs_graph = None
+
+    def update_graph(self):
+        self.queue_draw()
+        return self.fullscreen
+
+    def show_fullscreen_graph(self):
+        self.fs_graph = HeaterGraph(self._screen, self.printer, self.font_size * 2, fullscreen=True, store=self.store)
+        self._gtk.Dialog(_("Temperature"), None, self.fs_graph, self.close_fullscreen_graph)
+
+    def close_fullscreen_graph(self, dialog, response_id):
+        logging.info("Closing graph")
+        self.fs_graph.fullscreen = False
+        self._gtk.remove_dialog(dialog)
+
+    def event_cb(self, da, ev):
+        if self.fullscreen:
+            logging.info(f"Graph area: {ev.x} {ev.y}")
+        else:
+            self.show_fullscreen_graph()
+            logging.info("Entering Fullscreen")
 
     def add_object(self, name, ev_type, rgb=None, dashed=False, fill=False):
         rgb = [0, 0, 0] if rgb is None else rgb
@@ -35,22 +60,13 @@ class HeaterGraph(Gtk.DrawingArea):
             "rgb": rgb
         }})
 
-    @staticmethod
-    def event_cb(da, ev):
-        if ev.type == Gdk.EventType.BUTTON_PRESS:
-            x = ev.x
-            y = ev.y
-            logging.info(f"Graph area: {x} {y}")
-
     def get_max_num(self, data_points=0):
         mnum = [0]
         for device in self.store:
             if self.store[device]['show']:
-                temp = self.printer.get_temp_store(device, "temperatures", data_points)
-                if temp:
+                if temp := self.printer.get_temp_store(device, "temperatures", data_points):
                     mnum.append(max(temp))
-                target = self.printer.get_temp_store(device, "targets", data_points)
-                if target:
+                if target := self.printer.get_temp_store(device, "targets", data_points):
                     mnum.append(max(target))
         return max(mnum)
 
@@ -76,6 +92,7 @@ class HeaterGraph(Gtk.DrawingArea):
         data_points = int(round(graph_width * points_per_pixel, 0))
         max_num = math.ceil(self.get_max_num(data_points) * 1.1 / 10) * 10
         if points_per_pixel == 0:
+            logging.info(f"Data points: {data_points}")
             return
         d_width = 1 / points_per_pixel
 
@@ -86,8 +103,7 @@ class HeaterGraph(Gtk.DrawingArea):
             if not self.store[name]['show']:
                 continue
             for dev_type in self.store[name]:
-                d = self.printer.get_temp_store(name, dev_type, data_points)
-                if d:
+                if d := self.printer.get_temp_store(name, dev_type, data_points):
                     self.graph_data(
                         ctx, d, gsize, d_height_scale, d_width, self.store[name][dev_type]["rgb"],
                         self.store[name][dev_type]["dashed"], self.store[name][dev_type]["fill"]

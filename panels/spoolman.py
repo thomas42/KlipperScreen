@@ -148,6 +148,7 @@ class Panel(ScreenPanel):
             self._filterable.refilter()
 
     def __init__(self, screen, title):
+        title = title or "Spoolman"
         super().__init__(screen, title)
         self.apiClient = screen.apiclient
         if self._config.get_main_config().getboolean("24htime", True):
@@ -413,5 +414,5 @@ class Panel(ScreenPanel):
         if not result:
             self._screen.show_popup_message(_("Error getting active spool"))
             return
-        self._active_spool_id = result["result"]["spool_id"]
+        self._active_spool_id = result["spool_id"]
         return self._active_spool_id

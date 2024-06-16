@@ -14,12 +14,15 @@ class KlippyRest:
     def endpoint(self):
         return f"{'https' if int(self.port) in {443, 7130} else 'http'}://{self.ip}:{self.port}"
 
+    @staticmethod
+    def process_response(response):
+        return response['result'] if response and 'result' in response else response
+
     def get_server_info(self):
         return self.send_request("server/info")
 
     def get_oneshot_token(self):
-        res = self.send_request("access/oneshot_token")
-        return res['result'] if 'result' in res else False
+        return self.send_request("access/oneshot_token")
 
     def get_printer_info(self):
         return self.send_request("printer/info")
@@ -33,7 +36,6 @@ class KlippyRest:
     def _do_request(self, method, request_method, data=None, json=None, json_response=True, timeout=3):
         url = f"{self.endpoint}/{method}"
         headers = {"x-api-key": self.api_key} if self.api_key else {}
-        logging.debug(f"Sending {request_method} to {url}")
         try:
             callee = getattr(requests, request_method)
             response = callee(url, json=json, data=data, headers=headers, timeout=timeout)
@@ -49,7 +51,8 @@ class KlippyRest:
         return self._do_request(method, "post", data, json, json_response)
 
     def send_request(self, method, json=True, timeout=4):
-        return self._do_request(method, "get", json_response=json, timeout=timeout)
+        res = self._do_request(method, "get", json_response=json, timeout=timeout)
+        return self.process_response(res) if json else res
 
     @staticmethod
     def format_status(status):

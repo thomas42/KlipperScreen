@@ -1,92 +1,67 @@
 # Installation
 
-## First steps
+## First Steps
 
-Install the screen, following the instructions provided by the manufacturer, Some screens don't neeed extra software but some need to be installed with a script.
-It's strongly recommended to test it and ensure your hardware is working with RaspberryOS, Ubuntu or any distro you like.
-Once you have established that the screen is working, then proceed installing KlipperScreen.
+1. **Install the Screen**: Follow the manufacturer’s instructions for installing your screen. Some screens may require additional software, while others might not.
+2. **Test the Screen**: Ensure your hardware is functioning correctly by testing it with RaspberryOS, Ubuntu, or your preferred distribution.
+3. **Proceed to Install KlipperScreen**: Once you’ve confirmed that the screen is working, you can proceed with installing KlipperScreen.
 
 ## Setup
-The installation process is meant for a non-desktop version of the OS for example RaspberryOS Lite, but it should work on other debian derivatives.
 
-[Click to learn how to check if you installed a desktop version](FAQ.md#how-to-check-if-you-have-a-desktop-environment)
+The installation script is designed for RaspberryOS Lite, but it should work on other Debian derivatives as well.
 
-If you installed a desktop (GUI version) of the OS and want to run KlipperScreen exclusively then do:
-```sh title="Boot to console / KlipperScreen"
-sudo systemctl set-default multi-user.target && sudo reboot
-```
-to undo and go back to the desktop environment:
-```sh title="Boot to the desktop"
-sudo systemctl set-default graphical.target && sudo reboot
-```
+## Auto Install
 
-## Auto install
+[KIAUH](https://github.com/dw-0/kiauh) is a tool that helps you install or upgrade Klipper, Moonraker, Mainsail, and other extensions.
 
-[KIAUH](https://github.com/th33xitus/kiauh) is a tool that helps you install or upgrade Klipper, Moonraker, Mainsail, and other extensions.
+![KIAUH Screenshot](img/install/KIAUH.png)
 
-![Screenshot](img/install/KIAUH.png)
-
-You can visit [KIAUH on GitHub](https://github.com/th33xitus/kiauh) to learn more and view its documentation.
-
+Visit [KIAUH on GitHub](https://github.com/dw-0/kiauh) to learn more and view its documentation.
 
 ## Manual Install
 
-First install [Klipper](https://www.klipper3d.org/Installation.html) and [Moonraker](https://moonraker.readthedocs.io/en/latest/installation/).
+Follow these steps to manually install KlipperScreen:
 
-### KlipperScreen Installation
-Execute the following commands:
-
+Clone the KlipperScreen repository and run the installation script:
 ```sh
 cd ~/
 git clone https://github.com/KlipperScreen/KlipperScreen.git
-cd ~/KlipperScreen
-./scripts/KlipperScreen-install.sh
+./KlipperScreen/scripts/KlipperScreen-install.sh
 ```
+This script will install the necessary packages, create a Python virtual environment at `~/.KlipperScreen-env`, and install a systemd service file.
 
-This script will install packages that are listed under manual install, create a python virtual environment at
-`~/.KlipperScreen-env` and install a systemd service file.
-
-If you need a custom location for the configuration file, you can add -c or --configfile to the systemd file and specify
-the location of your configuration file.
-
-At this point KlipperScreen should be working, if it doesn't start then go to the [troubleshooting page](Troubleshooting.md)
-!!! warning
-
-## Moonraker configuration
-
-In moonraker.conf ensure that the IP of the device is a trusted client:
-
-```ini title="moonraker.conf"
-[authorization]
-trusted_clients:
-  127.0.0.1
-```
-!!! warning
-    having `force_logins: true` in this section or if you don't want to use `trusted_clients`
-
-    Will require the [moonraker api key](https://moonraker.readthedocs.io/en/latest/installation/#retrieving-the-api-key) in [KlipperScreen.conf](Configuration.md)
-
-If you wish to use the update manager feature of moonraker for KlipperScreen, add the following block to `moonraker.conf`:
-
-```ini title="moonraker.conf"
-[update_manager KlipperScreen]
-type: git_repo
-path: ~/KlipperScreen
-origin: https://github.com/KlipperScreen/KlipperScreen.git
-virtualenv: ~/.KlipperScreen-env
-requirements: scripts/KlipperScreen-requirements.txt
-system_dependencies: scripts/system-dependencies.json
-managed_services: KlipperScreen
-```
 !!! tip
-    If you see warnings in other UIs ignore them until KlipperScreen finishes installing, and Moonraker is restarted.
+    If you need a custom location for the configuration file, you can add the `-c` or `--configfile` option to the systemd file and specify the desired location.
 
+## Moonraker Configuration
+
+1. Ensure that the IP of the device is a trusted client in `moonraker.conf`:
+    ```ini
+    [authorization]
+    trusted_clients:
+      127.0.0.1
+    ```
+   Alternatively, add the [Moonraker API key](https://moonraker.readthedocs.io/en/latest/installation/#retrieving-the-api-key) to `KlipperScreen.conf`.
+
+2. To use the update manager feature of Moonraker for KlipperScreen, add the following block to `moonraker.conf`:
+    ```ini
+    [update_manager KlipperScreen]
+    type: git_repo
+    path: ~/KlipperScreen
+    origin: https://github.com/KlipperScreen/KlipperScreen.git
+    virtualenv: ~/.KlipperScreen-env
+    requirements: scripts/KlipperScreen-requirements.txt
+    system_dependencies: scripts/system-dependencies.json
+    managed_services: KlipperScreen
+    ```
+
+!!! tip
+    If you see warnings in other UIs, ignore them until KlipperScreen finishes installing and Moonraker is restarted.
 
 ## Printer Configuration
 
-Some basic configuration needs to be applied for correct functionality.
-
-```ini title="printer.cfg"
+Add the following basic configurations to your `printer.cfg` file for correct functionality:
+```ini
 [virtual_sdcard]
 path: ~/printer_data/gcodes
 [display_status]
@@ -95,4 +70,4 @@ path: ~/printer_data/gcodes
 
 ## Macros
 
-You may need some macros for the printer to function as you expected, [read more in the macros page](macros.md)
+You may need additional macros for the printer to function as expected. For more information, [read the macros page](macros.md).

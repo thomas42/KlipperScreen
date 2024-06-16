@@ -40,7 +40,7 @@ class KlipperScreenConfig:
     def __init__(self, configfile, screen=None):
         self.lang_list = None
         self.errors = []
-        self.default_config_path = os.path.join(klipperscreendir, "ks_includes", "defaults.conf")
+        self.default_config_path = os.path.join(klipperscreendir, "config", "defaults.conf")
         self.config = configparser.ConfigParser()
         self.config_path = self.get_config_file_location(configfile)
         logging.debug(f"Config path location: {self.config_path}")
@@ -50,6 +50,9 @@ class KlipperScreenConfig:
 
         try:
             self.config.read(self.default_config_path)
+            includes = [i[8:] for i in self.config.sections() if i.startswith("include ")]
+            for include in includes:
+                self._include_config("/".join(self.default_config_path.split("/")[:-1]), include, log=False)
             # In case a user altered defaults.conf
             self.validate_config(self.config)
             if self.config_path != self.default_config_path:
@@ -89,7 +92,7 @@ class KlipperScreenConfig:
             self.errors.append(msg)
 
         printers = [i for i in self.config.sections() if i.startswith("printer ")]
-        if len(printers) == 0:
+        if not printers:
             printers.append("Printer Printer")
         self.printers = [
             {printer[8:]: {
@@ -117,10 +120,8 @@ class KlipperScreenConfig:
         for lng in self.lang_list:
             self.langs[lng] = gettext.translation('KlipperScreen', localedir=lang_path, languages=[lng], fallback=True)
 
-        lang = self.get_main_config().get("language", None)
+        lang = self.get_main_config().get("language", "system_lang")
         logging.debug(f"Selected lang: {lang} OS lang: {locale.getlocale()[0]}")
-        if lang not in self.lang_list:
-            lang = self.find_language(lang)
         self.install_language(lang)
 
     def find_language(self, lang):
@@ -136,6 +137,8 @@ class KlipperScreenConfig:
         return next((language for language in self.lang_list if lang.startswith(language)), "en")
 
     def install_language(self, lang):
+        if lang not in self.lang_list:
+            lang = self.find_language(lang)
         logging.info(f"Using lang {lang}")
         self.lang = self.langs[lang]
         self.lang.install(names=['gettext', 'ngettext'])
@@ -161,7 +164,7 @@ class KlipperScreenConfig:
                     'show_heater_power', "show_scroll_steppers", "auto_open_extrude"
                 )
                 strs = (
-                    'default_printer', 'language', 'print_sort_dir', 'theme', 'screen_blanking', 'font_size',
+                    'default_printer', 'language', 'print_sort_dir', 'theme', 'screen_blanking_printing', 'font_size',
                     'print_estimate_method', 'screen_blanking', "screen_on_devices", "screen_off_devices", 'print_view',
                 )
                 numbers = (
@@ -196,6 +199,14 @@ class KlipperScreenConfig:
             for key in config[section]:
                 if key not in bools and key not in strs and key not in numbers:
                     msg = f'Option "{key}" not recognized for section "[{section}]"'
+                    if section.startswith("menu"):
+                        msg = (
+                            msg + "\n\n"
+                            + "KlipperScreen menu uses different options than Klipper\n"
+                            + "Syntax meant for text/graphical LCDs (usually blue)\n"
+                            + "will not work with KlipperScreen\n"
+                            + "please consult KlipperScreen documentation."
+                        )
                     if key == "camera_url":
                         msg = (
                             "camera_url has been deprecated in favor of moonraker cameras\n\n"
@@ -236,16 +247,14 @@ class KlipperScreenConfig:
     def _create_configurable_options(self, screen):
 
         self.configurable_options = [
-            {"language": {
-                "section": "main", "name": _("Language"), "type": None, "value": "system_lang",
-                "callback": screen.change_language, "options": [
-                    {"name": _("System") + " " + _("(default)"), "value": "system_lang"}]}},
             {"theme": {
                 "section": "main", "name": _("Icon Theme"), "type": "dropdown",
-                "value": "z-bolt", "callback": screen.restart_ks, "options": [
+                "tooltip": _("Changes how the interface looks"),
+                "value": "z-bolt", "callback": screen.change_theme, "options": [
                     {"name": "Z-bolt" + " " + _("(default)"), "value": "z-bolt"}]}},
             {"print_estimate_method": {
                 "section": "main", "name": _("Estimated Time Method"), "type": "dropdown",
+                "tooltip": _("Changes how the time remaining is calculated"),
                 "value": "auto", "options": [
                     {"name": _("Auto") + " " + _("(default)"), "value": "auto"},
                     {"name": _("File"), "value": "file"},
@@ -253,15 +262,26 @@ class KlipperScreenConfig:
                     {"name": _("Slicer"), "value": "slicer"}]}},
             {"screen_blanking": {
                 "section": "main", "name": _("Screen Power Off Time"), "type": "dropdown",
+                "tooltip": _("Timeout for screen black-out or power-off"),
                 "value": "3600", "callback": screen.set_screenblanking_timeout, "options": [
                     {"name": _("Never"), "value": "off"}]
             }},
-            {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary", "value": "True"}},
+            {"screen_blanking_printing": {
+                "section": "main", "name": _("Screen Power Off Time") + " (" + _("Printing") + ")",
+                "type": "dropdown",
+                "tooltip": _("Timeout for screen black-out or power-off during printing"),
+                "value": "3600", "callback": screen.set_screenblanking_printing_timeout, "options": [
+                    {"name": _("Never"), "value": "off"}]
+            }},
+            {"24htime": {"section": "main", "name": _("24 Hour Time"), "type": "binary",
+                         "tooltip": _("Disable for 12hs with am / pm"),
+                         "value": "True"}},
             {"side_macro_shortcut": {
                 "section": "main", "name": _("Macro shortcut on sidebar"), "type": "binary",
                 "value": "True", "callback": screen.toggle_shortcut}},
             {"font_size": {
                 "section": "main", "name": _("Font Size"), "type": "dropdown",
+                "tooltip": _("Inversely affects the icon size"),
                 "value": "medium", "callback": screen.restart_ks, "options": [
                     {"name": _("Small"), "value": "small"},
                     {"name": _("Medium") + " " + _("(default)"), "value": "medium"},
@@ -269,16 +289,23 @@ class KlipperScreenConfig:
                     {"name": _("Extra Large"), "value": "extralarge"},
                     {"name": _("Maximum"), "value": "max"}]}},
             {"confirm_estop": {"section": "main", "name": _("Confirm Emergency Stop"), "type": "binary",
+                               "tooltip": _("Asks for confirmation before stopping"),
                                "value": "False"}},
             {"only_heaters": {"section": "main", "name": _("Hide sensors in Temp."), "type": "binary",
+                              "tooltip": _("Show only devices that are able to be set"),
                               "value": "False", "callback": screen.reload_panels}},
             {"use_dpms": {"section": "main", "name": _("Screen DPMS"), "type": "binary",
+                          "tooltip": _("Enable screen power management") + "\n"
+                                     + _("Not all screens support this"),
                           "value": "True", "callback": screen.set_dpms}},
             {"autoclose_popups": {"section": "main", "name": _("Auto-close notifications"), "type": "binary",
+                                  "tooltip": _("Close messages after a timeout"),
                                   "value": "True"}},
             {"show_heater_power": {"section": "main", "name": _("Show Heater Power"), "type": "binary",
+                                   "tooltip": _("Current percentage and graph line"),
                                    "value": "False", "callback": screen.reload_panels}},
             {"show_scroll_steppers": {"section": "main", "name": _("Show Scrollbars Buttons"), "type": "binary",
+                                      "tooltip": _("Useful for un-responsive touchscreens"),
                                       "value": "False", "callback": screen.reload_panels}},
             {"auto_open_extrude": {"section": "main", "name": _("Auto-open Extrude On Pause"), "type": "binary",
                                    "value": "True", "callback": screen.reload_panels}},
@@ -294,28 +321,45 @@ class KlipperScreenConfig:
             {"move_speed_z": {"section": "main", "name": _("Z Move Speed (mm/s)"), "type": None, "value": "10"}},
             {"print_sort_dir": {"section": "main", "type": None, "value": "name_asc"}},
             {"print_view": {"section": "main", "type": None, "value": "thumbs"}},
+            {"language": {"section": "main", "name": _("Language"), "type": None, "value": "system_lang"}},
         ]
 
         self.configurable_options.extend(panel_options)
 
+        i0 = i1 = i2 = None
+        for i, option in enumerate(self.configurable_options):
+            if list(option)[0] == "theme":
+                i0 = i
+            elif list(option)[0] == "screen_blanking":
+                i1 = i
+            elif list(option)[0] == "screen_blanking_printing":
+                i2 = i
+            if i0 and i1 and i2:
+                break
+
         t_path = os.path.join(klipperscreendir, 'styles')
-        themes = [d for d in os.listdir(t_path) if (not os.path.isfile(os.path.join(t_path, d)) and d != "z-bolt")]
+        themes = [
+            d for d in os.listdir(t_path)
+            if (not os.path.isfile(os.path.join(t_path, d))
+                and d not in ("z-bolt", "printers"))
+        ]
         themes.sort()
-        theme_opt = self.configurable_options[1]['theme']['options']
 
         for theme in themes:
-            theme_opt.append({"name": theme, "value": theme})
+            self.configurable_options[i0]['theme']['options'].append({"name": theme, "value": theme})
 
-        index = self.configurable_options.index(
-            [i for i in self.configurable_options if list(i)[0] == "screen_blanking"][0])
         for num in SCREEN_BLANKING_OPTIONS:
             hour = num // 3600
-            minute = num / 60
+            minute = num // 60
             if hour > 0:
                 name = f'{hour} ' + ngettext("hour", "hours", hour)
             else:
-                name = f'{minute:.0f} ' + ngettext("minute", "minutes", minute)
-            self.configurable_options[index]['screen_blanking']['options'].append({
+                name = f'{minute} ' + ngettext("minute", "minutes", minute)
+            self.configurable_options[i1]['screen_blanking']['options'].append({
+                "name": name,
+                "value": f"{num}"
+            })
+            self.configurable_options[i2]['screen_blanking_printing']['options'].append({
                 "name": name,
                 "value": f"{num}"
             })
@@ -330,7 +374,7 @@ class KlipperScreenConfig:
 
     def exclude_from_config(self, config):
         exclude_list = ['preheat']
-        if not self.defined_config.getboolean('main', "use_default_menu", fallback=True):
+        if self.defined_config and not self.defined_config.getboolean('main', "use_default_menu", fallback=True):
             logging.info("Using custom menu, removing default menu entries.")
             exclude_list.extend(('menu __main', 'menu __print', 'menu __splashscreen'))
         for i in exclude_list:
@@ -340,7 +384,7 @@ class KlipperScreenConfig:
                         if k.startswith(i):
                             del self.config[k]
 
-    def _include_config(self, directory, filepath):
+    def _include_config(self, directory, filepath, log=True):
         full_path = filepath if filepath[0] == "/" else f"{directory}/{filepath}"
         parse_files = []
 
@@ -348,7 +392,7 @@ class KlipperScreenConfig:
             parent_dir = "/".join(full_path.split("/")[:-1])
             file = full_path.split("/")[-1]
             if not os.path.exists(parent_dir):
-                logging.info(f"Config Error: Directory {parent_dir} does not exist")
+                logging.error(f"Config Error: Directory {parent_dir} does not exist")
                 return
             files = os.listdir(parent_dir)
             regex = f"^{file.replace('*', '.*')}$"
@@ -356,7 +400,7 @@ class KlipperScreenConfig:
 
         else:
             if not os.path.exists(os.path.join(full_path)):
-                logging.info(f"Config Error: {full_path} does not exist")
+                logging.error(f"Config Error: {full_path} does not exist")
                 return
             parse_files.append(full_path)
 
@@ -368,7 +412,8 @@ class KlipperScreenConfig:
             for include in includes:
                 self._include_config("/".join(full_path.split("/")[:-1]), include)
             self.exclude_from_config(config)
-            self.log_config(config)
+            if log:
+                self.log_config(config)
             with open(file, 'r') as f:
                 string = f.read()
                 if self.validate_config(config, string=string):

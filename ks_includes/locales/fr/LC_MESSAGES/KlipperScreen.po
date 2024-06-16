@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
-"PO-Revision-Date: 2024-03-07 19:01+0000\n"
-"Last-Translator: samuel fradette <fradette20@gmail.com>\n"
+"POT-Creation-Date: 2024-06-02 08:38-0300\n"
+"PO-Revision-Date: 2024-05-15 07:01+0000\n"
+"Last-Translator: Miloslav Kos <kos.m@post.cz>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/fr/>\n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.6-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -70,6 +70,9 @@ msgstr "Êtes-vous sûr de vouloir exclure l’objet ?"
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Êtes-vous sûr de vouloir exécuter l'arrêt d'urgence ?"
 
+msgid "Are you sure you want to stop the calibration?"
+msgstr ""
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Êtes-vous sûr de vouloir annuler cette impression ?"
 
@@ -81,6 +84,9 @@ msgstr "Êtes-vous sûr de vouloir redémarrer le système ?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "Êtes-vous sûr de vouloir arrêter le système ?"
+
+msgid "Asks for confirmation before stopping"
+msgstr ""
 
 msgid "Auto"
 msgstr "Auto"
@@ -103,8 +109,8 @@ msgstr "Nivellement"
 msgid "Bed Mesh"
 msgstr "Maillage du plateau"
 
-msgid "Bed screw configuration:"
-msgstr "Configuration des vis du plateau:"
+msgid "Both"
+msgstr ""
 
 msgid "Calibrate"
 msgstr "Calibrer"
@@ -136,6 +142,12 @@ msgstr "Annulation"
 msgid "Cannot connect to Moonraker"
 msgstr "Impossible de se connecter à Moonraker"
 
+msgid "Changes how the interface looks"
+msgstr ""
+
+msgid "Changes how the time remaining is calculated"
+msgstr ""
+
 msgid "Channel"
 msgstr "Canal"
 
@@ -151,6 +163,9 @@ msgstr "Effacer"
 msgid "Close"
 msgstr "Fermer"
 
+msgid "Close messages after a timeout"
+msgstr ""
+
 msgid "Complete"
 msgstr "Impression terminée"
 
@@ -160,15 +175,27 @@ msgstr "Confirmer l'arrêt d'urgence"
 msgid "Connected"
 msgstr "Connecté"
 
+msgid "Connecting"
+msgstr ""
+
 #, python-format
 msgid "Connecting to %s"
 msgstr "Connexion à %s"
+
+msgid "Connection failed"
+msgstr ""
 
 msgid "Console"
 msgstr "Console"
 
 msgid "Cooldown"
 msgstr "Refroidir"
+
+msgid "Couldn't add network"
+msgstr ""
+
+msgid "Current percentage and graph line"
+msgstr ""
 
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS n’a pas pu charger et a été désactivé"
@@ -182,14 +209,24 @@ msgstr "Supprimer le dossier ?"
 msgid "Delete File?"
 msgstr "Supprimer le fichier ?"
 
-msgid "Deselect"
-msgstr "Désélectionner"
-
 msgid "Disable Motors"
 msgstr "Désactiver les moteurs"
 
+msgid "Disable for 12hs with am / pm"
+msgstr ""
+
+msgid "Disconnect"
+msgstr "Déconnecter"
+
 msgid "Distance (mm)"
 msgstr "Distance (mm)"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr ""
+
+msgid "Do you want to let KlipperScreen try to solve the issue?"
+msgstr ""
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -198,8 +235,11 @@ msgstr "Voulez-vous récupérer %s ?"
 msgid "Elapsed:"
 msgstr "Écoulé:"
 
-msgid "Ended official support in June 2023"
-msgstr "Fin du support officiel en juin 2023"
+msgid "Emergency Stop"
+msgstr ""
+
+msgid "Enable screen power management"
+msgstr ""
 
 msgid "Error"
 msgstr "Erreur"
@@ -214,6 +254,12 @@ msgid "Error setting active spool"
 msgstr "Erreur dans le réglage de la bobine active"
 
 msgid "Error trying to fetch spools"
+msgstr ""
+
+msgid "Error: Couldn't get a position to probe"
+msgstr ""
+
+msgid "Estimated Time"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -237,11 +283,20 @@ msgstr "Extrusion +"
 msgid "Extrusion -"
 msgstr "Extrusion -"
 
+msgid "Failed to delete connection"
+msgstr ""
+
+msgid "Failed to initialize"
+msgstr ""
+
 msgid "Failed, adjust position first"
 msgstr "Échec, ajustez d'abord la position"
 
 msgid "Fan"
 msgstr "Ventilation"
+
+msgid "Filament"
+msgstr ""
 
 msgid "Filament Used"
 msgstr "Filament utilisé"
@@ -285,17 +340,23 @@ msgstr "Débit:"
 msgid "Font Size"
 msgstr "Taille de la police"
 
+msgid "Forget"
+msgstr ""
+
 msgid "Full Update"
 msgstr "Mettre à jour"
+
+msgid "Gcodes"
+msgstr ""
+
+msgid "Getting IP address"
+msgstr ""
 
 msgid "Go Back"
 msgstr "Retour"
 
 msgid "Height:"
 msgstr "Hauteur:"
-
-msgid "Hidden"
-msgstr "Masqué"
 
 msgid "Hide"
 msgstr "Masquer"
@@ -304,9 +365,7 @@ msgid "Hide sensors in Temp."
 msgstr "Masquer les capteurs dans Températures"
 
 msgid "Hide temp."
-msgstr ""
-"Masquer les\n"
-"températures"
+msgstr "Masquer les températures"
 
 msgid "Home"
 msgstr "Accueil"
@@ -347,6 +406,12 @@ msgstr "Lancer un étalonnage PID pour :"
 msgid "Input Shaper"
 msgstr "Input Shaper"
 
+msgid "Insufficient priviledges detected"
+msgstr ""
+
+msgid "Insufficient privileges"
+msgstr ""
+
 msgid "Interface"
 msgstr "Interface"
 
@@ -355,6 +420,9 @@ msgstr "Invalide"
 
 msgid "Invalid password"
 msgstr "Mot de passe invalide"
+
+msgid "Inversely affects the icon size"
+msgstr ""
 
 msgid "Invert X"
 msgstr "Inverser l'axe X"
@@ -368,6 +436,9 @@ msgstr "Inverser l'axe Z"
 msgid "It may take more than 5 minutes depending on the heater power."
 msgstr ""
 "Cela peut prendre plus de 5 minutes en fonction de la puissance du chauffage."
+
+msgid "It's possible that the configuration is not correct"
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Redémarrer Klipper"
@@ -387,9 +458,6 @@ msgstr "Klipper tente de démarrer"
 msgid "Klipper will reboot"
 msgstr "Klipper va redémarrer"
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr "KlipperScreen ne sera plus pris en charge en juin 2024"
-
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -404,6 +472,9 @@ msgstr "Grande"
 
 msgid "Last Used"
 msgstr "Dernière utilisation"
+
+msgid "Layer Height"
+msgstr ""
 
 msgid "Layer:"
 msgstr "Couche:"
@@ -447,11 +518,11 @@ msgstr "Max"
 msgid "Max Acceleration"
 msgstr "Accélération maximale"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "Accélération à décélération maximale"
-
 msgid "Max Velocity"
 msgstr "Vélocité maximale"
+
+msgid "Max:"
+msgstr ""
 
 msgid "Maximum"
 msgstr "Maximum"
@@ -468,11 +539,20 @@ msgstr "Mesure Y"
 msgid "Medium"
 msgstr "Moyenne"
 
+msgid "Memory"
+msgstr ""
+
 msgid "Menu"
 msgstr "Menu"
 
 msgid "Mesh calibrate"
 msgstr "Calibration du maillage"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
+
+msgid "Minimum:"
+msgstr ""
 
 msgid "Modified"
 msgstr "Modifié"
@@ -495,6 +575,15 @@ msgstr "Nom"
 msgid "Network"
 msgstr "Réseau"
 
+msgid "Network connected"
+msgstr ""
+
+msgid "Network disconnected"
+msgstr ""
+
+msgid "Network not found"
+msgstr ""
+
 msgid "Never"
 msgstr "Jamais"
 
@@ -510,12 +599,8 @@ msgstr "Aucun maillage chargé"
 msgid "No wireless interface has been found"
 msgstr "Pas de périphérique sans-fil trouvé"
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
+msgid "Not all screens support this"
 msgstr ""
-"Non pris en charge pour la détection automatique, il doit être configuré "
-"dans klipperscreen.conf"
 
 msgid "Not working or not configured"
 msgstr "Ne fonctionne pas ou n'est pas configuré"
@@ -528,6 +613,9 @@ msgstr "Journal de notification vide"
 
 msgid "Notifications"
 msgstr "Notifications"
+
+msgid "Only for the move panel"
+msgstr ""
 
 #, python-format
 msgid "Outdated by %d"
@@ -562,6 +650,9 @@ msgstr "Pins"
 msgid "Please recompile and flash the micro-controller."
 msgstr "Veuillez recompiler et flasher le microcontrôleur."
 
+msgid "Please wait"
+msgstr ""
+
 msgid "Power"
 msgstr "Alimentation"
 
@@ -571,14 +662,14 @@ msgstr "Allumer l'imprimante"
 msgid "Pressure Advance:"
 msgstr "Avance de pression:"
 
+msgid "Pressure Advance"
+msgstr "Avance de pression"
+
 msgid "Print"
 msgstr "Imprimer"
 
 msgid "Print Control"
 msgstr "Contrôle de l'impression"
-
-msgid "Print Time"
-msgstr "Durée d'impression"
 
 msgid "Printer"
 msgstr "Imprimante"
@@ -623,6 +714,9 @@ msgstr "Référence"
 msgid "Refresh"
 msgstr "Rafraîchir"
 
+msgid "Remove network"
+msgstr ""
+
 msgid "Rename/Move:"
 msgstr "Renommer/déplacer :"
 
@@ -649,6 +743,9 @@ msgstr "Réessayer"
 
 msgid "Retrying"
 msgstr "Réessaye"
+
+msgid "Rotation invalid"
+msgstr ""
 
 msgid "Save"
 msgstr "Enregistrer"
@@ -678,8 +775,8 @@ msgstr "Délai d'extinction de l'écran"
 msgid "Screws Adjust"
 msgstr "Ajuster les vis"
 
-msgid "Select"
-msgstr "Sélectionner"
+msgid "Screws not used:"
+msgstr ""
 
 msgid "Send"
 msgstr "Envoyer"
@@ -698,6 +795,9 @@ msgstr "Afficher la puissance de chauffe"
 
 msgid "Show Scrollbars Buttons"
 msgstr "Boutons d'affichage des barres de défilement"
+
+msgid "Show only devices that are able to be set"
+msgstr ""
 
 msgid "Shutdown"
 msgstr "Arrêter"
@@ -735,14 +835,14 @@ msgstr "En attente"
 msgid "Start"
 msgstr "Démarrer"
 
-msgid "Starting WiFi Association"
-msgstr "Démarrage de l'association Wi-Fi"
-
 msgid "Starting recovery for"
 msgstr "Démarrage de la récupération pour"
 
 msgid "Starting update for"
 msgstr "Démarrage de la mise à jour pour"
+
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
 
 msgid "System"
 msgstr "Système"
@@ -753,11 +853,29 @@ msgstr "Redémarrez le système"
 msgid "System Shutdown"
 msgstr "Arrêter le système"
 
+msgid "System:"
+msgstr ""
+
 msgid "Temp (°C)"
 msgstr "Temp (°C)"
 
 msgid "Temperature"
 msgstr "Température"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr ""
+
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "This will affect screw positions and mesh graph"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off during printing"
+msgstr ""
 
 msgid "Total:"
 msgstr "Total:"
@@ -765,8 +883,8 @@ msgstr "Total:"
 msgid "Unknown Heater"
 msgstr "Chauffe inconnue"
 
-msgid "Unknown screw position"
-msgstr "Position de vis inconnue"
+msgid "Unknown security type"
+msgstr ""
 
 msgid "Unload"
 msgstr "Décharger"
@@ -789,8 +907,8 @@ msgstr "Mise à jour"
 msgid "Uploaded"
 msgstr "Envoyé"
 
-msgid "Warning"
-msgstr "Danger"
+msgid "Useful for un-responsive touchscreens"
+msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC n'est pas pris en charge par le backend essai du Stream"
@@ -821,8 +939,10 @@ msgid_plural "commits"
 msgstr[0] "changement"
 msgstr[1] "changements"
 
-msgid "dBm"
-msgstr "dBm"
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "hour"
 msgid_plural "hours"
@@ -851,6 +971,54 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#~ msgid "Ended official support in June 2023"
+#~ msgstr "Fin du support officiel en juin 2023"
+
+#~ msgid "Hidden"
+#~ msgstr "Masqué"
+
+#~ msgid "KlipperScreen will drop support in June 2024"
+#~ msgstr "KlipperScreen ne sera plus pris en charge en juin 2024"
+
+#~ msgid "Print Time"
+#~ msgstr "Durée d'impression"
+
+#~ msgid "Starting WiFi Association"
+#~ msgstr "Démarrage de l'association Wi-Fi"
+
+#~ msgid "Warning"
+#~ msgstr "Danger"
+
+#~ msgid "dBm"
+#~ msgstr "dBm"
+
+#~ msgid "Deselect"
+#~ msgstr "Désélectionner"
+
+#~ msgid "Select"
+#~ msgstr "Sélectionner"
+
+#~ msgid "Bed screw configuration:"
+#~ msgstr "Configuration des vis du plateau:"
+
+#~ msgid ""
+#~ "Not supported for auto-detection, it needs to be configured in "
+#~ "klipperscreen.conf"
+#~ msgstr ""
+#~ "Non pris en charge pour la détection automatique, il doit être configuré "
+#~ "dans klipperscreen.conf"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "Position de vis inconnue"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "Accélération à décélération maximale"
 
 #~ msgid "Continue"
 #~ msgstr "Continuer"
@@ -957,9 +1125,6 @@ msgstr "mm³/s"
 #~ msgid "IPv6"
 #~ msgstr "IPv6"
 
-#~ msgid "Disconnect"
-#~ msgstr "Déconnecter"
-
 #~ msgid "Duration Only"
 #~ msgstr "Durée seulement"
 
@@ -985,9 +1150,6 @@ msgstr "mm³/s"
 
 #~ msgid "Show Only Heaters in Temp."
 #~ msgstr "Afficher uniquement les éléments chauffants en temp."
-
-#~ msgid "Target"
-#~ msgstr "Cibler"
 
 #~ msgid "Temp"
 #~ msgstr "Temp"
@@ -1036,9 +1198,6 @@ msgstr "mm³/s"
 
 #~ msgid "Load Average"
 #~ msgstr "Charge moyenne"
-
-#~ msgid "Network Info"
-#~ msgstr "Information réseau "
 
 #~ msgid "Back"
 #~ msgstr "Retour"

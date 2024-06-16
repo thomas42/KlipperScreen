@@ -7,16 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
-"PO-Revision-Date: 2023-07-07 16:44+0800\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"POT-Creation-Date: 2024-06-02 08:38-0300\n"
+"PO-Revision-Date: 2024-06-01 12:09+0000\n"
+"Last-Translator: 峻瑜哥 <a728728728@gmail.com>\n"
+"Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
+"klipperscreen/klipperscreen/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.3\n"
+"X-Generator: Weblate 5.6-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -47,7 +48,7 @@ msgid "Add profile"
 msgstr "新增設定檔案"
 
 msgid "All"
-msgstr ""
+msgstr "全部"
 
 msgid "Apply"
 msgstr "應用"
@@ -61,13 +62,16 @@ msgid "Apply %s%.3f offset to Probe?"
 msgstr "將 %s%.3f 偏移量應用於探針？"
 
 msgid "Archived"
-msgstr ""
+msgstr "歸檔"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "你確定要排除該目標嗎？"
 
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "您確定要緊急停止嗎？"
+
+msgid "Are you sure you want to stop the calibration?"
+msgstr "您確定要停止校準嗎？"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "您確定要取消列印嗎？"
@@ -81,6 +85,9 @@ msgstr "您確定要重啟系統嗎？"
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "您確定要關閉系統嗎？"
 
+msgid "Asks for confirmation before stopping"
+msgstr "停止前要求確認"
+
 msgid "Auto"
 msgstr "自動"
 
@@ -91,7 +98,7 @@ msgid "Auto-close notifications"
 msgstr "自動關閉通知"
 
 msgid "Auto-open Extrude On Pause"
-msgstr ""
+msgstr "暫停時自動打開擠出"
 
 msgid "Auto-scroll"
 msgstr "自動滾屏"
@@ -102,8 +109,8 @@ msgstr "熱床調平"
 msgid "Bed Mesh"
 msgstr "床網"
 
-msgid "Bed screw configuration:"
-msgstr "熱床螺絲設定："
+msgid "Both"
+msgstr "雙向"
 
 msgid "Calibrate"
 msgstr "校準"
@@ -135,6 +142,12 @@ msgstr "正在取消"
 msgid "Cannot connect to Moonraker"
 msgstr "無法連線到Moonraker"
 
+msgid "Changes how the interface looks"
+msgstr "改變介面的外觀"
+
+msgid "Changes how the time remaining is calculated"
+msgstr "更改剩餘時間的計算方式"
+
 msgid "Channel"
 msgstr "群組"
 
@@ -150,6 +163,9 @@ msgstr "清除"
 msgid "Close"
 msgstr "關閉"
 
+msgid "Close messages after a timeout"
+msgstr "逾時後關閉訊息"
+
 msgid "Complete"
 msgstr "完成"
 
@@ -159,9 +175,15 @@ msgstr "緊急停止需確認"
 msgid "Connected"
 msgstr "已連線"
 
+msgid "Connecting"
+msgstr ""
+
 #, python-format
 msgid "Connecting to %s"
 msgstr "連線到 %s"
+
+msgid "Connection failed"
+msgstr ""
 
 msgid "Console"
 msgstr "控制台"
@@ -169,8 +191,14 @@ msgstr "控制台"
 msgid "Cooldown"
 msgstr "冷卻"
 
-msgid "DPMS has failed to load and has been disabled"
+msgid "Couldn't add network"
 msgstr ""
+
+msgid "Current percentage and graph line"
+msgstr "當前百分比和折線圖"
+
+msgid "DPMS has failed to load and has been disabled"
+msgstr "DPMS 載入失敗並已停用"
 
 msgid "Date"
 msgstr "日期"
@@ -181,14 +209,24 @@ msgstr "刪除資料夾？"
 msgid "Delete File?"
 msgstr "刪除檔案？"
 
-msgid "Deselect"
-msgstr "取消選擇"
-
 msgid "Disable Motors"
 msgstr "關閉電機"
 
+msgid "Disable for 12hs with am / pm"
+msgstr "在十二小時顯示模式中不顯示AM/PM"
+
+msgid "Disconnect"
+msgstr "断开"
+
 msgid "Distance (mm)"
 msgstr "擠出長度（mm）"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr ""
+
+msgid "Do you want to let KlipperScreen try to solve the issue?"
+msgstr ""
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -197,8 +235,11 @@ msgstr "你想恢復 %s 嗎？"
 msgid "Elapsed:"
 msgstr "已用時間："
 
-msgid "Ended official support in June 2023"
-msgstr ""
+msgid "Emergency Stop"
+msgstr "緊急停止"
+
+msgid "Enable screen power management"
+msgstr "開啟螢幕功率管理功能"
 
 msgid "Error"
 msgstr "錯誤"
@@ -215,6 +256,12 @@ msgstr ""
 msgid "Error trying to fetch spools"
 msgstr ""
 
+msgid "Error: Couldn't get a position to probe"
+msgstr "錯誤：無法取得要探測的位置"
+
+msgid "Estimated Time"
+msgstr ""
+
 msgid "Estimated Time Method"
 msgstr "估算剩餘時間方式"
 
@@ -228,7 +275,7 @@ msgid "Extrude"
 msgstr "擠出機"
 
 msgid "Extruders"
-msgstr ""
+msgstr "擠出機"
 
 msgid "Extrusion +"
 msgstr "擠壓 +"
@@ -236,11 +283,20 @@ msgstr "擠壓 +"
 msgid "Extrusion -"
 msgstr "擠壓 -"
 
+msgid "Failed to delete connection"
+msgstr ""
+
+msgid "Failed to initialize"
+msgstr ""
+
 msgid "Failed, adjust position first"
 msgstr "失敗，請先調整位置"
 
 msgid "Fan"
 msgstr "風扇"
+
+msgid "Filament"
+msgstr ""
 
 msgid "Filament Used"
 msgstr "已消耗耗材"
@@ -261,7 +317,7 @@ msgid "File:"
 msgstr "檔案："
 
 msgid "Filter"
-msgstr ""
+msgstr "過濾器"
 
 msgid "Finding ADXL"
 msgstr "查詢ADXL"
@@ -284,17 +340,23 @@ msgstr "流速："
 msgid "Font Size"
 msgstr "字型大小"
 
+msgid "Forget"
+msgstr ""
+
 msgid "Full Update"
 msgstr "全部更新"
+
+msgid "Gcodes"
+msgstr ""
+
+msgid "Getting IP address"
+msgstr ""
 
 msgid "Go Back"
 msgstr "返回"
 
 msgid "Height:"
 msgstr "高度："
-
-msgid "Hidden"
-msgstr "隱藏的"
 
 msgid "Hide"
 msgstr "隱藏"
@@ -330,7 +392,7 @@ msgid "Hostname"
 msgstr "主機名"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Icon Theme"
 msgstr "主題"
@@ -344,6 +406,12 @@ msgstr "啟動PID校準："
 msgid "Input Shaper"
 msgstr "共振補償"
 
+msgid "Insufficient priviledges detected"
+msgstr ""
+
+msgid "Insufficient privileges"
+msgstr ""
+
 msgid "Interface"
 msgstr "介面"
 
@@ -352,6 +420,9 @@ msgstr "無效"
 
 msgid "Invalid password"
 msgstr "密碼無效"
+
+msgid "Inversely affects the icon size"
+msgstr ""
 
 msgid "Invert X"
 msgstr "反轉X軸"
@@ -364,6 +435,9 @@ msgstr "反轉Z軸"
 
 msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "這可能需要5分鐘以上的時間，這取決於加熱器的功率。"
+
+msgid "It's possible that the configuration is not correct"
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "重啟Klipper"
@@ -383,9 +457,6 @@ msgstr "Klipper正在啟動"
 msgid "Klipper will reboot"
 msgstr "Klipper將重新啟動"
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
-
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -397,6 +468,9 @@ msgid "Large"
 msgstr "大"
 
 msgid "Last Used"
+msgstr "最後使用"
+
+msgid "Layer Height"
 msgstr ""
 
 msgid "Layer:"
@@ -415,10 +489,10 @@ msgid "Load"
 msgstr "載入耗材"
 
 msgid "Loading..."
-msgstr ""
+msgstr "載入中..."
 
 msgid "Lost Connection to Moonraker"
-msgstr ""
+msgstr "與Moonraker失去連接"
 
 msgid "Lower Nozzle"
 msgstr "降低噴嘴"
@@ -433,7 +507,7 @@ msgid "Main Menu"
 msgstr "主選單"
 
 msgid "Material"
-msgstr ""
+msgstr "材料"
 
 msgid "Max"
 msgstr "最大"
@@ -441,11 +515,11 @@ msgstr "最大"
 msgid "Max Acceleration"
 msgstr "最大加速度"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "最大加速至減速"
-
 msgid "Max Velocity"
 msgstr "最大速度"
+
+msgid "Max:"
+msgstr ""
 
 msgid "Maximum"
 msgstr "最大"
@@ -462,11 +536,20 @@ msgstr "測量Y軸"
 msgid "Medium"
 msgstr "中"
 
+msgid "Memory"
+msgstr "記憶體"
+
 msgid "Menu"
 msgstr "選單"
 
 msgid "Mesh calibrate"
 msgstr "床網校準"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
+
+msgid "Minimum:"
+msgstr ""
 
 msgid "Modified"
 msgstr "已修改"
@@ -489,6 +572,15 @@ msgstr "名稱"
 msgid "Network"
 msgstr "網路"
 
+msgid "Network connected"
+msgstr ""
+
+msgid "Network disconnected"
+msgstr ""
+
+msgid "Network not found"
+msgstr ""
+
 msgid "Never"
 msgstr "從不"
 
@@ -496,18 +588,16 @@ msgid "New"
 msgstr "新的值"
 
 msgid "No elegible macros:"
-msgstr ""
+msgstr "無可用巨集:"
 
 msgid "No mesh has been loaded"
-msgstr ""
+msgstr "未載入網床"
 
 msgid "No wireless interface has been found"
-msgstr ""
+msgstr "未找到wifi介面"
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
-msgstr "不支援自動檢測，需要在klpperscreen.conf中進行設定"
+msgid "Not all screens support this"
+msgstr ""
 
 msgid "Not working or not configured"
 msgstr ""
@@ -519,6 +609,9 @@ msgid "Notification log empty"
 msgstr ""
 
 msgid "Notifications"
+msgstr ""
+
+msgid "Only for the move panel"
 msgstr ""
 
 #, python-format
@@ -553,6 +646,9 @@ msgstr "引腳"
 msgid "Please recompile and flash the micro-controller."
 msgstr "請重新編譯並燒錄微控制器。"
 
+msgid "Please wait"
+msgstr ""
+
 msgid "Power"
 msgstr "電源"
 
@@ -562,14 +658,14 @@ msgstr "啟動列印機"
 msgid "Pressure Advance:"
 msgstr "壓力推進："
 
+msgid "Pressure Advance"
+msgstr "壓力推進"
+
 msgid "Print"
 msgstr "列印"
 
 msgid "Print Control"
 msgstr "列印控制"
-
-msgid "Print Time"
-msgstr "列印時間"
 
 msgid "Printer"
 msgstr "列印機"
@@ -613,6 +709,9 @@ msgstr "參考"
 msgid "Refresh"
 msgstr "重新整理"
 
+msgid "Remove network"
+msgstr ""
+
 msgid "Rename/Move:"
 msgstr "重新命名/移動："
 
@@ -639,6 +738,9 @@ msgstr "重試"
 
 msgid "Retrying"
 msgstr "正在重試"
+
+msgid "Rotation invalid"
+msgstr ""
 
 msgid "Save"
 msgstr "儲存"
@@ -668,8 +770,8 @@ msgstr "關閉螢幕時間"
 msgid "Screws Adjust"
 msgstr "螺絲調整"
 
-msgid "Select"
-msgstr "選擇"
+msgid "Screws not used:"
+msgstr ""
 
 msgid "Send"
 msgstr "發送"
@@ -687,6 +789,9 @@ msgid "Show Heater Power"
 msgstr "顯示加熱器功率"
 
 msgid "Show Scrollbars Buttons"
+msgstr ""
+
+msgid "Show only devices that are able to be set"
 msgstr ""
 
 msgid "Shutdown"
@@ -725,14 +830,14 @@ msgstr ""
 msgid "Start"
 msgstr "開始"
 
-msgid "Starting WiFi Association"
-msgstr "開始WiFi連線"
-
 msgid "Starting recovery for"
 msgstr "開始恢復"
 
 msgid "Starting update for"
 msgstr "開始更新"
+
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
 
 msgid "System"
 msgstr "系統"
@@ -743,11 +848,29 @@ msgstr "重啟系統"
 msgid "System Shutdown"
 msgstr "關閉系統"
 
+msgid "System:"
+msgstr ""
+
 msgid "Temp (°C)"
 msgstr "溫度 (°C)"
 
 msgid "Temperature"
 msgstr "溫度"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr ""
+
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "This will affect screw positions and mesh graph"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off during printing"
+msgstr ""
 
 msgid "Total:"
 msgstr "合計："
@@ -755,8 +878,8 @@ msgstr "合計："
 msgid "Unknown Heater"
 msgstr "未知加熱器"
 
-msgid "Unknown screw position"
-msgstr "未知螺絲位置"
+msgid "Unknown security type"
+msgstr ""
 
 msgid "Unload"
 msgstr "解除安裝"
@@ -779,7 +902,7 @@ msgstr "正在更新"
 msgid "Uploaded"
 msgstr "上傳於"
 
-msgid "Warning"
+msgid "Useful for un-responsive touchscreens"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
@@ -810,8 +933,9 @@ msgid "commit"
 msgid_plural "commits"
 msgstr[0] "更改"
 
-msgid "dBm"
-msgstr "dBm"
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
 
 msgid "hour"
 msgid_plural "hours"
@@ -838,6 +962,45 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+
+#~ msgid "Ended official support in June 2023"
+#~ msgstr "2023年6月結束官方支持"
+
+#~ msgid "Hidden"
+#~ msgstr "隱藏的"
+
+#~ msgid "Print Time"
+#~ msgstr "列印時間"
+
+#~ msgid "Starting WiFi Association"
+#~ msgstr "開始WiFi連線"
+
+#~ msgid "dBm"
+#~ msgstr "dBm"
+
+#~ msgid "Deselect"
+#~ msgstr "取消選擇"
+
+#~ msgid "Select"
+#~ msgstr "選擇"
+
+#~ msgid "Bed screw configuration:"
+#~ msgstr "熱床螺絲設定："
+
+#~ msgid ""
+#~ "Not supported for auto-detection, it needs to be configured in "
+#~ "klipperscreen.conf"
+#~ msgstr "不支援自動檢測，需要在klpperscreen.conf中進行設定"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "未知螺絲位置"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "最大加速至減速"
 
 #~ msgid "Continue"
 #~ msgstr "繼續"
@@ -929,9 +1092,6 @@ msgstr "mm³/s"
 #~ msgid "IPv6"
 #~ msgstr "IPv6 地址"
 
-#~ msgid "Disconnect"
-#~ msgstr "断开"
-
 #~ msgid "Duration Only"
 #~ msgstr "持续时间"
 
@@ -957,9 +1117,6 @@ msgstr "mm³/s"
 
 #~ msgid "Show Only Heaters in Temp."
 #~ msgstr "仅显示使用中的加热器."
-
-#~ msgid "Target"
-#~ msgstr "目标"
 
 #~ msgid "Temp"
 #~ msgstr "温度"
@@ -1002,9 +1159,6 @@ msgstr "mm³/s"
 
 #~ msgid "Load Average"
 #~ msgstr "平均负载"
-
-#~ msgid "Network Info"
-#~ msgstr "网络信息"
 
 #~ msgid "Screen Blanking Time"
 #~ msgstr "关闭屏幕时间"

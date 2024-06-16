@@ -14,6 +14,7 @@ from ks_includes.KlippyGtk import find_widget
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
+        title = title or _("Job Status")
         super().__init__(screen, title)
         self.grid = Gtk.Grid(column_homogeneous=True)
         self.pos_z = 0.0
@@ -81,8 +82,6 @@ class Panel(ScreenPanel):
 
         self.labels['file'] = Gtk.Label(label="Filename", hexpand=True)
         self.labels['file'].get_style_context().add_class("printing-filename")
-        self.labels['status'] = Gtk.Label(label="Status")
-        self.labels['status'].get_style_context().add_class("printing-status")
         self.labels['lcdmessage'] = Gtk.Label()
         self.labels['lcdmessage'].get_style_context().add_class("printing-status")
 
@@ -90,9 +89,8 @@ class Panel(ScreenPanel):
             self.labels[label].set_halign(Gtk.Align.START)
             self.labels[label].set_ellipsize(Pango.EllipsizeMode.END)
 
-        fi_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        fi_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         fi_box.add(self.labels['file'])
-        fi_box.add(self.labels['status'])
         fi_box.add(self.labels['lcdmessage'])
         self.grid.attach(fi_box, 1, 0, 3, 1)
 
@@ -105,13 +103,13 @@ class Panel(ScreenPanel):
         box.add(self.labels['progress_text'])
 
         overlay = Gtk.Overlay(hexpand=True)
+        overlay.set_size_request(*(self._gtk.font_size * 5,) * 2)
         overlay.add(self.labels['darea'])
         overlay.add_overlay(box)
         self.grid.attach(overlay, 0, 0, 1, 1)
 
         self.labels['thumbnail'] = self._gtk.Button("file")
         self.labels['thumbnail'].connect("clicked", self.show_fullscreen_thumbnail)
-        self.labels['thumbnail'].set_hexpand(False)
         self.labels['info_grid'] = Gtk.Grid()
         self.labels['info_grid'].attach(self.labels['thumbnail'], 0, 0, 1, 1)
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
@@ -143,7 +141,7 @@ class Panel(ScreenPanel):
         }
         for button in buttons:
             buttons[button].set_halign(Gtk.Align.START)
-        buttons['fan'].connect("clicked", self.menu_item_clicked, {"panel": "fan", "name": _("Fan")})
+        buttons['fan'].connect("clicked", self.menu_item_clicked, {"panel": "fan"})
         self.buttons.update(buttons)
 
         self.buttons['extruder'] = {}
@@ -153,7 +151,7 @@ class Panel(ScreenPanel):
                                                                   Gtk.PositionType.LEFT, 1)
             self.buttons['extruder'][extruder].set_label(self.labels[extruder].get_text())
             self.buttons['extruder'][extruder].connect("clicked", self.menu_item_clicked,
-                                                       {"panel": "temperature", "name": _("Temperature"),
+                                                       {"panel": "temperature",
                                                         'extra': extruder})
             self.buttons['extruder'][extruder].set_halign(Gtk.Align.START)
 
@@ -181,7 +179,7 @@ class Panel(ScreenPanel):
 
             self.buttons['heater'][dev].set_label(self.labels[dev].get_text())
             self.buttons['heater'][dev].connect("clicked", self.menu_item_clicked,
-                                                {"panel": "temperature", "name": _("Temperature"), "extra": dev})
+                                                {"panel": "temperature", "extra": dev})
             self.buttons['heater'][dev].set_halign(Gtk.Align.START)
             self.labels['temp_grid'].attach(self.buttons['heater'][dev], n, 0, 1, 1)
             n += 1
@@ -205,8 +203,7 @@ class Panel(ScreenPanel):
                             self.labels[device] = Gtk.Label(label="-")
                             self.buttons['heater'][device].set_label(self.labels[device].get_text())
                             self.buttons['heater'][device].connect("clicked", self.menu_item_clicked,
-                                                                   {"panel": "temperature",
-                                                                    "name": _("Temperature")})
+                                                                   {"panel": "temperature"})
                             self.buttons['heater'][device].set_halign(Gtk.Align.START)
                             self.labels['temp_grid'].attach(self.buttons['heater'][device], n, 0, 1, 1)
                             n += 1
@@ -354,7 +351,7 @@ class Panel(ScreenPanel):
         self.buttons['cancel'].connect("clicked", self.cancel)
         self.buttons['control'].connect("clicked", self._screen._go_to_submenu, "")
         self.buttons['fine_tune'].connect("clicked", self.menu_item_clicked, {
-            "panel": "fine_tune", "name": _("Fine Tuning")})
+            "panel": "fine_tune"})
         self.buttons['menu'].connect("clicked", self.close_panel)
         self.buttons['pause'].connect("clicked", self.pause)
         self.buttons['restart'].connect("clicked", self.restart)
@@ -430,7 +427,7 @@ class Panel(ScreenPanel):
     def cancel_confirm(self, dialog, response_id):
         self._gtk.remove_dialog(dialog)
         if response_id == Gtk.ResponseType.APPLY:
-            self.menu_item_clicked(None, {"panel": "exclude", "name": _("Exclude Object")})
+            self.menu_item_clicked(None, {"panel": "exclude"})
             return
         if response_id == Gtk.ResponseType.CANCEL:
             self.enable_button("pause", "cancel")
@@ -470,7 +467,7 @@ class Panel(ScreenPanel):
                 self.set_state("printing")
             return
         elif action == "notify_metadata_update" and data['filename'] == self.filename:
-            self.update_file_metadata()
+            self.update_file_metadata(response=True)
         elif action != "notify_status_update":
             return
 
@@ -478,9 +475,10 @@ class Panel(ScreenPanel):
             if x in data:
                 self.update_temp(
                     x,
-                    self._printer.get_dev_stat(x, "temperature"),
-                    self._printer.get_dev_stat(x, "target"),
-                    self._printer.get_dev_stat(x, "power"),
+                    self._printer.get_stat(x, "temperature"),
+                    self._printer.get_stat(x, "target"),
+                    self._printer.get_stat(x, "power"),
+                    digits=0
                 )
                 if x in self.buttons['extruder']:
                     self.buttons['extruder'][x].set_label(self.labels[x].get_text())
@@ -605,6 +603,7 @@ class Panel(ScreenPanel):
         self.labels["duration"].set_label(self.format_time(total_duration))
         elapsed_label = f"{self.labels['elapsed'].get_text()}  {self.labels['duration'].get_text()}"
         self.buttons['elapsed'].set_label(elapsed_label)
+        find_widget(self.buttons['elapsed'], Gtk.Label).set_ellipsize(Pango.EllipsizeMode.END)
         estimated = slicer_time = filament_time = file_time = 0
         timeleft_type = self._config.get_config()['main'].get('print_estimate_method', 'auto')
 
@@ -651,6 +650,7 @@ class Panel(ScreenPanel):
             self.labels["time_left"].set_label(self.format_eta(estimated, print_duration))
             remaining_label = f"{self.labels['left'].get_text()}  {self.labels['time_left'].get_text()}"
             self.buttons['left'].set_label(remaining_label)
+            find_widget(self.buttons['left'], Gtk.Label).set_ellipsize(Pango.EllipsizeMode.END)
         self.update_progress(progress)
 
     def update_progress(self, progress: float):
@@ -660,25 +660,27 @@ class Panel(ScreenPanel):
 
     def set_state(self, state, msg=""):
         if state == "printing":
-            self.labels["status"].set_label(_("Printing"))
+            self._screen.set_panel_title(
+                _("Printing") if self._printer.extrudercount > 0 else _("Working")
+            )
         elif state == "complete":
             self.update_progress(1)
-            self.labels["status"].set_label(_("Complete"))
+            self._screen.set_panel_title(_("Complete"))
             self.buttons['left'].set_label("-")
             self._add_timeout(self._config.get_main_config().getint("job_complete_timeout", 0))
         elif state == "error":
-            self.labels['status'].set_label(_("Error"))
+            self._screen.set_panel_title(_("Error"))
             self._screen.show_popup_message(msg)
             self._add_timeout(self._config.get_main_config().getint("job_error_timeout", 0))
         elif state == "cancelling":
-            self.labels["status"].set_label(_("Cancelling"))
+            self._screen.set_panel_title(_("Cancelling"))
         elif state == "cancelled" or (state == "standby" and self.state == "cancelled"):
-            self.labels["status"].set_label(_("Cancelled"))
+            self._screen.set_panel_title(_("Cancelled"))
             self._add_timeout(self._config.get_main_config().getint("job_cancelled_timeout", 0))
         elif state == "paused":
-            self.labels["status"].set_label(_("Paused"))
+            self._screen.set_panel_title(_("Paused"))
         elif state == "standby":
-            self.labels["status"].set_label(_("Standby"))
+            self._screen.set_panel_title(_("Standby"))
         if self.state != state:
             logging.debug(f"Changing job_status state from '{self.state}' to '{state}'")
             self.state = state
@@ -734,13 +736,18 @@ class Panel(ScreenPanel):
 
     def show_file_thumbnail(self):
         if self._screen.vertical_mode:
-            width = self._screen.width * 0.9
-            height = self._screen.height / 4
+            max_width = self._screen.width * 0.9
+            max_height = self._screen.height / 4
         else:
-            width = self._screen.width * .25
-            height = self._gtk.content_height * 0.47
+            max_width = self._screen.width * .25
+            max_height = self._gtk.content_height * 0.47
+        width = min(self.labels['thumbnail'].get_allocated_width(), max_width)
+        height = min(self.labels['thumbnail'].get_allocated_height(), max_height)
+        if width <= 1 or height <= 1:
+            width = max_width
+            height = max_height
+        self.labels['thumbnail'].set_hexpand(False)
         pixbuf = self.get_file_image(self.filename, width, height)
-        logging.debug(self.filename)
         if pixbuf is None:
             logging.debug("no pixbuf")
             return
@@ -749,15 +756,12 @@ class Panel(ScreenPanel):
             image.set_from_pixbuf(pixbuf)
 
     def show_fullscreen_thumbnail(self, widget):
-        buttons = [
-            {"name": _("Close"), "response": Gtk.ResponseType.CANCEL}
-        ]
         pixbuf = self.get_file_image(self.filename, self._screen.width * .9, self._screen.height * .75)
         if pixbuf is None:
             return
         image = Gtk.Image.new_from_pixbuf(pixbuf)
         image.set_vexpand(True)
-        self._gtk.Dialog(self.filename, buttons, image, self.close_fullscreen_thumbnail)
+        self._gtk.Dialog(self.filename, None, image, self.close_fullscreen_thumbnail)
 
     def close_fullscreen_thumbnail(self, dialog, response_id):
         self._gtk.remove_dialog(dialog)
@@ -765,30 +769,36 @@ class Panel(ScreenPanel):
     def update_filename(self, filename):
         if not filename:
             return
+        if self.animation_timeout is not None:
+            GLib.source_remove(self.animation_timeout)
+            self.animation_timeout = None
         self.filename = filename
+        logging.debug(f"Updating filename to {filename}")
         self.labels["file"].set_label(os.path.splitext(self.filename)[0])
         self.filename_label = {
             "complete": self.labels['file'].get_label(),
             "current": self.labels['file'].get_label(),
-            "position": 0,
-            "limit": (self._screen.width * 37 / 480) // (self._gtk.font_size / 11),
-            "length": len(self.labels['file'].get_label())
         }
-        if self.animation_timeout is None and (self.filename_label['length'] - self.filename_label['limit']) > 0:
-            self.animation_timeout = GLib.timeout_add_seconds(1, self.animate_label)
+        ellipsized = self.labels['file'].get_layout().is_ellipsized()
+        if ellipsized:
+            self.animation_timeout = GLib.timeout_add(500, self.animate_label)
+        else:
+            self.animation_timeout = None
         self.update_file_metadata()
 
     def animate_label(self):
-        pos = self.filename_label['position']
-        if pos > (self.filename_label['length'] - self.filename_label['limit']):
-            self.filename_label['position'] = 0
-            self.labels['file'].set_label(self.filename_label['complete'])
+        if not self.filename_label or not self.animation_timeout:
+            return False
+        ellipsized = self.labels['file'].get_layout().is_ellipsized()
+        if ellipsized:
+            self.filename_label['current'] = self.filename_label['current'][1:]
+            self.labels['file'].set_label(self.filename_label['current'] + " " * 6)
         else:
-            self.labels['file'].set_label(self.filename_label['current'][pos:self.filename_label['length']])
-            self.filename_label['position'] += 1
+            self.filename_label['current'] = self.filename_label['complete']
+            self.labels['file'].set_label(self.filename_label['complete'])
         return True
 
-    def update_file_metadata(self):
+    def update_file_metadata(self, response=False):
         if self._files.file_metadata_exists(self.filename):
             self.file_metadata = self._files.get_file_info(self.filename)
             logging.info(f"Update Metadata. File: {self.filename} Size: {self.file_metadata['size']}")
@@ -806,7 +816,9 @@ class Panel(ScreenPanel):
                     self.labels['total_layers'].set_label(f"{((self.oheight - self.f_layer_h) / self.layer_h) + 1:.0f}")
             if "filament_total" in self.file_metadata:
                 self.labels['filament_total'].set_label(f"{float(self.file_metadata['filament_total']) / 1000:.1f} m")
-        else:
+        elif not response:
             logging.debug("Cannot find file metadata. Listening for updated metadata")
             self._files.request_metadata(self.filename)
+        else:
+            logging.debug("Cannot load file metadata")
         self.show_file_thumbnail()

@@ -6,6 +6,7 @@ from gi.repository import Gtk, GLib
 from panels.menu import Panel as MenuPanel
 from ks_includes.widgets.heatergraph import HeaterGraph
 from ks_includes.widgets.keypad import Keypad
+from ks_includes.KlippyGtk import find_widget
 
 
 class Panel(MenuPanel):
@@ -25,18 +26,19 @@ class Panel(MenuPanel):
         stats = self._printer.get_printer_status_data()["printer"]
         if stats["temperature_devices"]["count"] > 0 or stats["extruders"]["count"] > 0:
             self._gtk.reset_temp_color()
-            self.main_menu.attach(self.create_left_panel(), 0, 0, 1, 1)
         if self._screen.vertical_mode:
+            self.main_menu.attach(self.create_left_panel(), 0, 0, 1, 3)
             self.labels['menu'] = self.arrangeMenuItems(items, 3, True)
             scroll.add(self.labels['menu'])
-            self.main_menu.attach(scroll, 0, 1, 1, 1)
+            self.main_menu.attach(scroll, 0, 3, 1, 2)
         else:
+            self.main_menu.attach(self.create_left_panel(), 0, 0, 1, 1)
             self.labels['menu'] = self.arrangeMenuItems(items, 2, True)
             scroll.add(self.labels['menu'])
             self.main_menu.attach(scroll, 1, 0, 1, 1)
         self.content.add(self.main_menu)
 
-    def update_graph_visibility(self):
+    def update_graph_visibility(self, force_hide=False):
         if self.left_panel is None:
             logging.info("No left panel")
             return
@@ -51,7 +53,7 @@ class Panel(MenuPanel):
                 self.devices[device]['name'].get_style_context().add_class("graph_label")
             else:
                 self.devices[device]['name'].get_style_context().remove_class("graph_label")
-        if count > 0:
+        if count > 0 and not force_hide:
             if self.labels['da'] not in self.left_panel:
                 self.left_panel.add(self.labels['da'])
             self.labels['da'].queue_draw()
@@ -82,7 +84,7 @@ class Panel(MenuPanel):
 
         logging.info(f"Adding device: {device}")
 
-        temperature = self._printer.get_dev_stat(device, "temperature")
+        temperature = self._printer.get_stat(device, "temperature")
         if temperature is None:
             return False
 
@@ -140,6 +142,7 @@ class Panel(MenuPanel):
         self.labels['da'].set_showing(device, visible)
 
         temp = self._gtk.Button(label="", lines=1)
+        find_widget(temp, Gtk.Label).set_ellipsize(False)
         if can_target:
             temp.connect("clicked", self.show_numpad, device)
 
@@ -189,7 +192,6 @@ class Panel(MenuPanel):
         else:
             logging.info(f"Unknown heater: {self.active_heater}")
             self._screen.show_popup_message(_("Unknown Heater") + " " + self.active_heater)
-        self._printer.set_dev_stat(self.active_heater, "target", temp)
 
     def verify_max_temp(self, temp):
         temp = int(temp)
@@ -218,7 +220,10 @@ class Panel(MenuPanel):
 
         name = Gtk.Label()
         temp = Gtk.Label(label=_("Temp (°C)"))
-        temp.get_style_context().add_class("heater-grid-temp")
+        if self._show_heater_power:
+            temp.get_style_context().add_class("heater-grid-temp-power")
+        else:
+            temp.get_style_context().add_class("heater-grid-temp")
 
         self.labels['devices'].attach(name, 0, 0, 1, 1)
         self.labels['devices'].attach(temp, 1, 0, 1, 1)
@@ -243,11 +248,17 @@ class Panel(MenuPanel):
         self.active_heater = None
 
         if self._screen.vertical_mode:
-            self.main_menu.remove_row(1)
-            self.main_menu.attach(self.labels['menu'], 0, 1, 1, 1)
+            if not self._gtk.ultra_tall:
+                self.update_graph_visibility(force_hide=False)
+            top = self.main_menu.get_child_at(0, 0)
+            bottom = self.main_menu.get_child_at(0, 2)
+            self.main_menu.remove(top)
+            self.main_menu.remove(bottom)
+            self.main_menu.attach(top, 0, 0, 1, 3)
+            self.main_menu.attach(self.labels["menu"], 0, 3, 1, 2)
         else:
             self.main_menu.remove_column(1)
-            self.main_menu.attach(self.labels['menu'], 1, 0, 1, 1)
+            self.main_menu.attach(self.labels["menu"], 1, 0, 1, 1)
         self.main_menu.show_all()
         self.numpad_visible = False
         self._screen.base_panel.set_control_sensitive(False, control='back')
@@ -259,9 +270,9 @@ class Panel(MenuPanel):
             if x in data:
                 self.update_temp(
                     x,
-                    self._printer.get_dev_stat(x, "temperature"),
-                    self._printer.get_dev_stat(x, "target"),
-                    self._printer.get_dev_stat(x, "power"),
+                    self._printer.get_stat(x, "temperature"),
+                    self._printer.get_stat(x, "target"),
+                    self._printer.get_stat(x, "power"),
                 )
 
     def show_numpad(self, widget, device):
@@ -279,8 +290,14 @@ class Panel(MenuPanel):
         self.labels["keypad"].clear()
 
         if self._screen.vertical_mode:
-            self.main_menu.remove_row(1)
-            self.main_menu.attach(self.labels["keypad"], 0, 1, 1, 1)
+            if not self._gtk.ultra_tall:
+                self.update_graph_visibility(force_hide=True)
+            top = self.main_menu.get_child_at(0, 0)
+            bottom = self.main_menu.get_child_at(0, 3)
+            self.main_menu.remove(top)
+            self.main_menu.remove(bottom)
+            self.main_menu.attach(top, 0, 0, 1, 2)
+            self.main_menu.attach(self.labels["keypad"], 0, 2, 1, 2)
         else:
             self.main_menu.remove_column(1)
             self.main_menu.attach(self.labels["keypad"], 1, 0, 1, 1)

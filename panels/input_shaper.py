@@ -16,6 +16,7 @@ SHAPERS = ['zv', 'mzv', 'zvd', 'ei', '2hump_ei', '3hump_ei']
 
 class Panel(ScreenPanel):
     def __init__(self, screen, title):
+        title = title or _("Input Shaper")
         super().__init__(screen, title)
         self.freq_xy_adj = {}
         self.freq_xy_combo = {}
@@ -162,9 +163,11 @@ class Panel(ScreenPanel):
                 self.save_config()
         # shaper_type_y:ei shaper_freq_y:48.400 damping_ratio_y:0.100000
         if 'shaper_type_' in data:
-            results = re.search(r'shaper_type_(?P<axis>[xy]):(?P<shaper_type>.*?) shaper_freq_.:('
-                                r'?P<shaper_freq>[0-9.]+)', data)
-            if results:
+            if results := re.search(
+                r'shaper_type_(?P<axis>[xy]):(?P<shaper_type>.*?) shaper_freq_.:('
+                r'?P<shaper_freq>[0-9.]+)',
+                data,
+            ):
                 results = results.groupdict()
                 self.freq_xy_adj['shaper_freq_' + results['axis']].set_value(float(results['shaper_freq']))
                 self.freq_xy_combo['shaper_type_' + results['axis']].set_active(SHAPERS.index(results['shaper_type']))

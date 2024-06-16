@@ -7,17 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Klipperscreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
-"PO-Revision-Date: 2022-11-30 18:11-0300\n"
-"Last-Translator: Tal Rahav <talrhv1@gmail.com>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2024-06-02 08:38-0300\n"
+"PO-Revision-Date: 2024-04-13 16:48+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Hebrew <https://hosted.weblate.org/projects/klipperscreen/"
+"klipperscreen/he/>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? "
-"2 : 3);\n"
-"X-Generator: Poedit 3.2.1\n"
+"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
+"n % 10 == 0) ? 2 : 3));\n"
+"X-Generator: Weblate 5.5-dev\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #, python-format
@@ -71,6 +72,9 @@ msgstr ""
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "האם אתה בטוח שאתה רוצה לבצע עצירת חירום?"
 
+msgid "Are you sure you want to stop the calibration?"
+msgstr ""
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "האם אתה בטוח שברצונך לבטל את ההדפסה?"
 
@@ -82,6 +86,9 @@ msgstr "האם אתה בטוח שברצונך לאתחל את המערכת?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "האם אתה בטוח שברצונך לכבות את המערכת?"
+
+msgid "Asks for confirmation before stopping"
+msgstr ""
 
 msgid "Auto"
 msgstr "אוטומטי"
@@ -104,8 +111,8 @@ msgstr "פילוס מיטה"
 msgid "Bed Mesh"
 msgstr "מיפוי מיטה"
 
-msgid "Bed screw configuration:"
-msgstr "הגדרת בורג מיטה"
+msgid "Both"
+msgstr ""
 
 msgid "Calibrate"
 msgstr "לכייל"
@@ -137,6 +144,12 @@ msgstr "מבטל"
 msgid "Cannot connect to Moonraker"
 msgstr "לא ניתן להתחבר ל-Moonraker"
 
+msgid "Changes how the interface looks"
+msgstr ""
+
+msgid "Changes how the time remaining is calculated"
+msgstr ""
+
 msgid "Channel"
 msgstr "ערוץ"
 
@@ -152,6 +165,9 @@ msgstr "נקה"
 msgid "Close"
 msgstr "סגור"
 
+msgid "Close messages after a timeout"
+msgstr ""
+
 msgid "Complete"
 msgstr "הסתיים"
 
@@ -161,15 +177,27 @@ msgstr "אשר עצירת חירום"
 msgid "Connected"
 msgstr "מחובר"
 
+msgid "Connecting"
+msgstr ""
+
 #, python-format
 msgid "Connecting to %s"
 msgstr "מתחבר ל- %s"
+
+msgid "Connection failed"
+msgstr ""
 
 msgid "Console"
 msgstr "קונסול"
 
 msgid "Cooldown"
 msgstr "הפעל קירור"
+
+msgid "Couldn't add network"
+msgstr ""
+
+msgid "Current percentage and graph line"
+msgstr ""
 
 msgid "DPMS has failed to load and has been disabled"
 msgstr ""
@@ -183,14 +211,24 @@ msgstr ""
 msgid "Delete File?"
 msgstr "מחק קובץ"
 
-msgid "Deselect"
-msgstr "בטל את הבחירה"
-
 msgid "Disable Motors"
 msgstr "השבת מנועים"
 
+msgid "Disable for 12hs with am / pm"
+msgstr ""
+
+msgid "Disconnect"
+msgstr "לְנַתֵק"
+
 msgid "Distance (mm)"
 msgstr "מרחק (מ\"מ)"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr ""
+
+msgid "Do you want to let KlipperScreen try to solve the issue?"
+msgstr ""
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -199,7 +237,10 @@ msgstr "האם ברצונך לשחזר %s?"
 msgid "Elapsed:"
 msgstr "זמן שעבר:"
 
-msgid "Ended official support in June 2023"
+msgid "Emergency Stop"
+msgstr ""
+
+msgid "Enable screen power management"
 msgstr ""
 
 msgid "Error"
@@ -215,6 +256,12 @@ msgid "Error setting active spool"
 msgstr ""
 
 msgid "Error trying to fetch spools"
+msgstr ""
+
+msgid "Error: Couldn't get a position to probe"
+msgstr ""
+
+msgid "Estimated Time"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -238,11 +285,20 @@ msgstr "שיחול +"
 msgid "Extrusion -"
 msgstr "שיחול -"
 
+msgid "Failed to delete connection"
+msgstr ""
+
+msgid "Failed to initialize"
+msgstr ""
+
 msgid "Failed, adjust position first"
 msgstr "נכשל, תחילה התאם את המיקום"
 
 msgid "Fan"
 msgstr "מאוורר"
+
+msgid "Filament"
+msgstr ""
 
 msgid "Filament Used"
 msgstr "חומר ששומש"
@@ -286,17 +342,23 @@ msgstr "קצב זרימה"
 msgid "Font Size"
 msgstr "גודל טקסט"
 
+msgid "Forget"
+msgstr ""
+
 msgid "Full Update"
 msgstr "עדכון מלא"
+
+msgid "Gcodes"
+msgstr ""
+
+msgid "Getting IP address"
+msgstr ""
 
 msgid "Go Back"
 msgstr "חזרה"
 
 msgid "Height:"
 msgstr "גובה"
-
-msgid "Hidden"
-msgstr "מוסתר"
 
 msgid "Hide"
 msgstr "הסתר"
@@ -346,6 +408,12 @@ msgstr ""
 msgid "Input Shaper"
 msgstr "מעצב גימור"
 
+msgid "Insufficient priviledges detected"
+msgstr ""
+
+msgid "Insufficient privileges"
+msgstr ""
+
 msgid "Interface"
 msgstr "ממשק"
 
@@ -353,6 +421,9 @@ msgid "Invalid"
 msgstr "לא חוקי"
 
 msgid "Invalid password"
+msgstr ""
+
+msgid "Inversely affects the icon size"
 msgstr ""
 
 msgid "Invert X"
@@ -365,6 +436,9 @@ msgid "Invert Z"
 msgstr "הפוך את Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
+msgstr ""
+
+msgid "It's possible that the configuration is not correct"
 msgstr ""
 
 msgid "Klipper Restart"
@@ -385,9 +459,6 @@ msgstr "קליפר מנסה לעלות"
 msgid "Klipper will reboot"
 msgstr "קליפר יבצע אתחול"
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
-
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -399,6 +470,9 @@ msgid "Large"
 msgstr "גדול"
 
 msgid "Last Used"
+msgstr ""
+
+msgid "Layer Height"
 msgstr ""
 
 msgid "Layer:"
@@ -443,11 +517,11 @@ msgstr "מקסימום"
 msgid "Max Acceleration"
 msgstr "מקסימום תאוצה"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "האצה מרבית להאטה"
-
 msgid "Max Velocity"
 msgstr "מהירות מרבית"
+
+msgid "Max:"
+msgstr ""
 
 msgid "Maximum"
 msgstr ""
@@ -464,10 +538,19 @@ msgstr "מדוד Y"
 msgid "Medium"
 msgstr "בינוני"
 
+msgid "Memory"
+msgstr ""
+
 msgid "Menu"
 msgstr "תפריט"
 
 msgid "Mesh calibrate"
+msgstr ""
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
+
+msgid "Minimum:"
 msgstr ""
 
 msgid "Modified"
@@ -491,6 +574,15 @@ msgstr "שם"
 msgid "Network"
 msgstr "רשת"
 
+msgid "Network connected"
+msgstr ""
+
+msgid "Network disconnected"
+msgstr ""
+
+msgid "Network not found"
+msgstr ""
+
 msgid "Never"
 msgstr ""
 
@@ -506,10 +598,8 @@ msgstr ""
 msgid "No wireless interface has been found"
 msgstr ""
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
-msgstr "איתור אוטומטי אינו נתמך, זה צריך להיות מוגדר ב klipperscreen"
+msgid "Not all screens support this"
+msgstr ""
 
 msgid "Not working or not configured"
 msgstr ""
@@ -521,6 +611,9 @@ msgid "Notification log empty"
 msgstr ""
 
 msgid "Notifications"
+msgstr ""
+
+msgid "Only for the move panel"
 msgstr ""
 
 #, python-format
@@ -558,6 +651,9 @@ msgstr "פינים"
 msgid "Please recompile and flash the micro-controller."
 msgstr "אנא הדר (קמפל) מחדש ובצע פלאש למיקרו-בקר."
 
+msgid "Please wait"
+msgstr ""
+
 msgid "Power"
 msgstr "הפעלה"
 
@@ -567,14 +663,14 @@ msgstr "הפעל מדפסת"
 msgid "Pressure Advance:"
 msgstr "פרשר אדוונס"
 
+msgid "Pressure Advance"
+msgstr "פרשר אדוונס"
+
 msgid "Print"
 msgstr "הדפסה"
 
 msgid "Print Control"
 msgstr "שליטה בהדפסה"
-
-msgid "Print Time"
-msgstr "זמן הדפסה"
 
 msgid "Printer"
 msgstr "מדפסת"
@@ -618,6 +714,9 @@ msgstr "התייחסות"
 msgid "Refresh"
 msgstr "רענון"
 
+msgid "Remove network"
+msgstr ""
+
 msgid "Rename/Move:"
 msgstr ""
 
@@ -644,6 +743,9 @@ msgstr ""
 
 msgid "Retrying"
 msgstr "מנסה שוב"
+
+msgid "Rotation invalid"
+msgstr ""
 
 msgid "Save"
 msgstr "לשמור"
@@ -673,8 +775,8 @@ msgstr "זמן כיבוי מסך"
 msgid "Screws Adjust"
 msgstr "סידור ברגים"
 
-msgid "Select"
-msgstr "בחר"
+msgid "Screws not used:"
+msgstr ""
 
 msgid "Send"
 msgstr "שליחה"
@@ -692,6 +794,9 @@ msgid "Show Heater Power"
 msgstr "הצג זרם מיטה"
 
 msgid "Show Scrollbars Buttons"
+msgstr ""
+
+msgid "Show only devices that are able to be set"
 msgstr ""
 
 msgid "Shutdown"
@@ -730,14 +835,14 @@ msgstr ""
 msgid "Start"
 msgstr "התחל"
 
-msgid "Starting WiFi Association"
-msgstr "מתחיל איגוד WiFi"
-
 msgid "Starting recovery for"
 msgstr "החל התאוששות עבור"
 
 msgid "Starting update for"
 msgstr "מתחיל עדכון עבור"
+
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
 
 msgid "System"
 msgstr "מערכת"
@@ -748,11 +853,29 @@ msgstr "אתחול מערכת"
 msgid "System Shutdown"
 msgstr "כיבוי מערכת"
 
+msgid "System:"
+msgstr ""
+
 msgid "Temp (°C)"
 msgstr "טמפ' (°C)"
 
 msgid "Temperature"
 msgstr "טמפרטורה"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr ""
+
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "This will affect screw positions and mesh graph"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off during printing"
+msgstr ""
 
 msgid "Total:"
 msgstr "סך הכל:"
@@ -760,8 +883,8 @@ msgstr "סך הכל:"
 msgid "Unknown Heater"
 msgstr "מחמם לא ידוע"
 
-msgid "Unknown screw position"
-msgstr "מיקום בורג לא ידוע"
+msgid "Unknown security type"
+msgstr ""
 
 msgid "Unload"
 msgstr "העלה"
@@ -784,7 +907,7 @@ msgstr "מעדכן"
 msgid "Uploaded"
 msgstr "הועלה"
 
-msgid "Warning"
+msgid "Useful for un-responsive touchscreens"
 msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
@@ -818,8 +941,12 @@ msgstr[1] "שינויים"
 msgstr[2] "שינויים"
 msgstr[3] "שינויים"
 
-msgid "dBm"
-msgstr "dBm"
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 msgid "hour"
 msgid_plural "hours"
@@ -852,6 +979,45 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#~ msgid "Hidden"
+#~ msgstr "מוסתר"
+
+#~ msgid "Print Time"
+#~ msgstr "זמן הדפסה"
+
+#~ msgid "Starting WiFi Association"
+#~ msgstr "מתחיל איגוד WiFi"
+
+#~ msgid "dBm"
+#~ msgstr "dBm"
+
+#~ msgid "Deselect"
+#~ msgstr "בטל את הבחירה"
+
+#~ msgid "Select"
+#~ msgstr "בחר"
+
+#~ msgid "Bed screw configuration:"
+#~ msgstr "הגדרת בורג מיטה"
+
+#~ msgid ""
+#~ "Not supported for auto-detection, it needs to be configured in "
+#~ "klipperscreen.conf"
+#~ msgstr "איתור אוטומטי אינו נתמך, זה צריך להיות מוגדר ב klipperscreen"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "מיקום בורג לא ידוע"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "האצה מרבית להאטה"
 
 #~ msgid "Continue"
 #~ msgstr "המשך"
@@ -970,9 +1136,6 @@ msgstr ""
 #~ msgid "Unknown Heater "
 #~ msgstr "מחמם לא ידוע "
 
-#~ msgid "Disconnect"
-#~ msgstr "לְנַתֵק"
-
 #~ msgid "Duration Only"
 #~ msgstr "משך הזמן בלבד"
 
@@ -998,9 +1161,6 @@ msgstr ""
 
 #~ msgid "Show Only Heaters in Temp."
 #~ msgstr "הצג רק מחממים בטמפ'."
-
-#~ msgid "Target"
-#~ msgstr "יַעַד"
 
 #~ msgid "Temp"
 #~ msgstr "טמפ'"
@@ -1043,9 +1203,6 @@ msgstr ""
 
 #~ msgid "Load Average"
 #~ msgstr "עומס ממוצע"
-
-#~ msgid "Network Info"
-#~ msgstr "מידע על הרשת"
 
 #~ msgid "Back"
 #~ msgstr "חזור"

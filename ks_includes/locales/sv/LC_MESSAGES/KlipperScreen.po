@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 17:39-0300\n"
-"PO-Revision-Date: 2024-01-23 12:01+0000\n"
+"POT-Creation-Date: 2024-06-02 08:38-0300\n"
+"PO-Revision-Date: 2024-04-13 16:48+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/sv/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -70,6 +70,9 @@ msgstr "Är du säker på att du vill utesluta objektet?"
 msgid "Are you sure you want to run Emergency Stop?"
 msgstr "Är du säker på att du vill köra Nödstopp?"
 
+msgid "Are you sure you want to stop the calibration?"
+msgstr ""
+
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Är du säker på att du vill avbryta denna utskrift?"
 
@@ -81,6 +84,9 @@ msgstr "Är du säker på att du vill starta om systemet?"
 
 msgid "Are you sure you wish to shutdown the system?"
 msgstr "Är du säker på att du vill stänga av systemet?"
+
+msgid "Asks for confirmation before stopping"
+msgstr ""
 
 msgid "Auto"
 msgstr "Automatisk"
@@ -103,8 +109,8 @@ msgstr "Bädd Level"
 msgid "Bed Mesh"
 msgstr "Bädd Mesh"
 
-msgid "Bed screw configuration:"
-msgstr "Konfiguration bädd skruvar:"
+msgid "Both"
+msgstr ""
 
 msgid "Calibrate"
 msgstr "Kalibrera"
@@ -136,6 +142,12 @@ msgstr "Avbryter"
 msgid "Cannot connect to Moonraker"
 msgstr "Kan inte ansluta till Moonraker"
 
+msgid "Changes how the interface looks"
+msgstr ""
+
+msgid "Changes how the time remaining is calculated"
+msgstr ""
+
 msgid "Channel"
 msgstr "Kanal"
 
@@ -151,6 +163,9 @@ msgstr "Rensa"
 msgid "Close"
 msgstr "Stäng"
 
+msgid "Close messages after a timeout"
+msgstr ""
+
 msgid "Complete"
 msgstr "Färdig"
 
@@ -160,15 +175,27 @@ msgstr "Bekräfta nödstopp"
 msgid "Connected"
 msgstr "Ansluten"
 
+msgid "Connecting"
+msgstr ""
+
 #, python-format
 msgid "Connecting to %s"
 msgstr "Ansluter till %s"
+
+msgid "Connection failed"
+msgstr ""
 
 msgid "Console"
 msgstr "Konsol"
 
 msgid "Cooldown"
 msgstr "Nedkylning"
+
+msgid "Couldn't add network"
+msgstr ""
+
+msgid "Current percentage and graph line"
+msgstr ""
 
 msgid "DPMS has failed to load and has been disabled"
 msgstr "DPMS kunde inte laddas och har inaktiverats"
@@ -182,14 +209,24 @@ msgstr "Ta bort katalogen?"
 msgid "Delete File?"
 msgstr "Radera fil?"
 
-msgid "Deselect"
-msgstr "Avmarkera"
-
 msgid "Disable Motors"
 msgstr "Inaktivera motorer"
 
+msgid "Disable for 12hs with am / pm"
+msgstr ""
+
+msgid "Disconnect"
+msgstr ""
+
 msgid "Distance (mm)"
 msgstr "Avstånd (mm)"
+
+#, python-format
+msgid "Do you want to forget or disconnect %s?"
+msgstr ""
+
+msgid "Do you want to let KlipperScreen try to solve the issue?"
+msgstr ""
 
 #, python-format
 msgid "Do you want to recover %s?"
@@ -198,8 +235,11 @@ msgstr "Vill du återställa %s?"
 msgid "Elapsed:"
 msgstr "Förfluten:"
 
-msgid "Ended official support in June 2023"
-msgstr "Avslutade officiellt stöd i juni 2023"
+msgid "Emergency Stop"
+msgstr ""
+
+msgid "Enable screen power management"
+msgstr ""
 
 msgid "Error"
 msgstr "Fel"
@@ -214,6 +254,12 @@ msgid "Error setting active spool"
 msgstr ""
 
 msgid "Error trying to fetch spools"
+msgstr ""
+
+msgid "Error: Couldn't get a position to probe"
+msgstr ""
+
+msgid "Estimated Time"
 msgstr ""
 
 msgid "Estimated Time Method"
@@ -237,11 +283,20 @@ msgstr "Extrudering +"
 msgid "Extrusion -"
 msgstr "Extrudering -"
 
+msgid "Failed to delete connection"
+msgstr ""
+
+msgid "Failed to initialize"
+msgstr ""
+
 msgid "Failed, adjust position first"
 msgstr "Misslyckades, justera positionen först"
 
 msgid "Fan"
 msgstr "Fläkt"
+
+msgid "Filament"
+msgstr ""
 
 msgid "Filament Used"
 msgstr "Filament används"
@@ -285,17 +340,23 @@ msgstr "Flödeshastighet:"
 msgid "Font Size"
 msgstr "Textstorlek"
 
+msgid "Forget"
+msgstr ""
+
 msgid "Full Update"
 msgstr "Fullständig Uppdatering"
+
+msgid "Gcodes"
+msgstr ""
+
+msgid "Getting IP address"
+msgstr ""
 
 msgid "Go Back"
 msgstr "Gå tillbaka"
 
 msgid "Height:"
 msgstr "Höjd:"
-
-msgid "Hidden"
-msgstr "Dold"
 
 msgid "Hide"
 msgstr "Dölj"
@@ -345,6 +406,12 @@ msgstr "Initiera en PID-kalibrering för:"
 msgid "Input Shaper"
 msgstr "Input Shaper"
 
+msgid "Insufficient priviledges detected"
+msgstr ""
+
+msgid "Insufficient privileges"
+msgstr ""
+
 msgid "Interface"
 msgstr "Gränssnitt"
 
@@ -353,6 +420,9 @@ msgstr "Ogiltig"
 
 msgid "Invalid password"
 msgstr "Felaktigt lösenord"
+
+msgid "Inversely affects the icon size"
+msgstr ""
 
 msgid "Invert X"
 msgstr "Invertera X"
@@ -365,6 +435,9 @@ msgstr "Invertera Z"
 
 msgid "It may take more than 5 minutes depending on the heater power."
 msgstr "Det kan ta mer än 5 minuter beroende på värmarens effekt."
+
+msgid "It's possible that the configuration is not correct"
+msgstr ""
 
 msgid "Klipper Restart"
 msgstr "Klipper Omstart"
@@ -384,9 +457,6 @@ msgstr "Klipper försöker starta"
 msgid "Klipper will reboot"
 msgstr "Klipper kommer att starta om"
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr "KlipperScreen kommer att ta bort stödet i juni 2024"
-
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
 msgstr ""
@@ -400,6 +470,9 @@ msgstr "Stor"
 
 msgid "Last Used"
 msgstr "Senast använd"
+
+msgid "Layer Height"
+msgstr ""
 
 msgid "Layer:"
 msgstr "Lager:"
@@ -443,11 +516,11 @@ msgstr "Max"
 msgid "Max Acceleration"
 msgstr "Max acceleration"
 
-msgid "Max Acceleration to Deceleration"
-msgstr "Max acceleration till inbromsning"
-
 msgid "Max Velocity"
 msgstr "Max Hastighet"
+
+msgid "Max:"
+msgstr ""
 
 msgid "Maximum"
 msgstr "Maximal"
@@ -464,11 +537,20 @@ msgstr "Mått Y"
 msgid "Medium"
 msgstr "Medium"
 
+msgid "Memory"
+msgstr ""
+
 msgid "Menu"
 msgstr "Meny"
 
 msgid "Mesh calibrate"
 msgstr "Mesh kalibrera"
+
+msgid "Minimum Cruise Ratio"
+msgstr ""
+
+msgid "Minimum:"
+msgstr ""
 
 msgid "Modified"
 msgstr "Ändrad"
@@ -491,6 +573,15 @@ msgstr "Namn"
 msgid "Network"
 msgstr "Nätverk"
 
+msgid "Network connected"
+msgstr ""
+
+msgid "Network disconnected"
+msgstr ""
+
+msgid "Network not found"
+msgstr ""
+
 msgid "Never"
 msgstr "Aldrig"
 
@@ -506,12 +597,8 @@ msgstr "Ingen mesh har laddats"
 msgid "No wireless interface has been found"
 msgstr "Inget trådlöst gränssnitt har hittats"
 
-msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
-"conf"
+msgid "Not all screens support this"
 msgstr ""
-"Stöds inte för automatisk upptäckt, den måste konfigureras i klipperscreen."
-"conf"
 
 msgid "Not working or not configured"
 msgstr "Fungerar inte eller inte konfigurerad"
@@ -524,6 +611,9 @@ msgstr "Aviseringsloggen tom"
 
 msgid "Notifications"
 msgstr "Aviseringar"
+
+msgid "Only for the move panel"
+msgstr ""
 
 #, python-format
 msgid "Outdated by %d"
@@ -558,6 +648,9 @@ msgstr "Pins"
 msgid "Please recompile and flash the micro-controller."
 msgstr "Vänligen kompilera om och flasha mikrokontrollern."
 
+msgid "Please wait"
+msgstr ""
+
 msgid "Power"
 msgstr "Ström"
 
@@ -567,14 +660,14 @@ msgstr "Slå på skrivaren"
 msgid "Pressure Advance:"
 msgstr "Tryckförflyttning:"
 
+msgid "Pressure Advance"
+msgstr "Tryckförflyttning"
+
 msgid "Print"
 msgstr "Skriv ut"
 
 msgid "Print Control"
 msgstr "Utskriftskontroll"
-
-msgid "Print Time"
-msgstr "Utskriftstid"
 
 msgid "Printer"
 msgstr "Skrivare"
@@ -618,6 +711,9 @@ msgstr "Referens"
 msgid "Refresh"
 msgstr "Ladda om"
 
+msgid "Remove network"
+msgstr ""
+
 msgid "Rename/Move:"
 msgstr "Byt namn/flytta:"
 
@@ -644,6 +740,9 @@ msgstr "Försök igen"
 
 msgid "Retrying"
 msgstr "Försöker igen"
+
+msgid "Rotation invalid"
+msgstr ""
 
 msgid "Save"
 msgstr "Spara"
@@ -673,8 +772,8 @@ msgstr "Avstängningstid för skärmen"
 msgid "Screws Adjust"
 msgstr "Skruvar Justera"
 
-msgid "Select"
-msgstr "Välj"
+msgid "Screws not used:"
+msgstr ""
 
 msgid "Send"
 msgstr "Skicka"
@@ -693,6 +792,9 @@ msgstr "Visa kraft värmare"
 
 msgid "Show Scrollbars Buttons"
 msgstr "Visa rullningslistknappar"
+
+msgid "Show only devices that are able to be set"
+msgstr ""
 
 msgid "Shutdown"
 msgstr "Stänga av"
@@ -730,14 +832,14 @@ msgstr "Vilar"
 msgid "Start"
 msgstr "Starta"
 
-msgid "Starting WiFi Association"
-msgstr "Startar WiFi Association"
-
 msgid "Starting recovery for"
 msgstr "Börjar återhämtning för"
 
 msgid "Starting update for"
 msgstr "Startar uppdatering för"
+
+msgid "Swaps buttons if they are on top of each other, affects other panels"
+msgstr ""
 
 msgid "System"
 msgstr "System"
@@ -748,11 +850,29 @@ msgstr "System Omstart"
 msgid "System Shutdown"
 msgstr "System Avstängning"
 
+msgid "System:"
+msgstr ""
+
 msgid "Temp (°C)"
 msgstr "Temperatur (°C)"
 
 msgid "Temperature"
 msgstr "Temperatur"
+
+msgid "The system doesn't meet the minimum requirement"
+msgstr ""
+
+msgid "This panel supports up-to 9 screws in a 3x3 Grid"
+msgstr ""
+
+msgid "This will affect screw positions and mesh graph"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off"
+msgstr ""
+
+msgid "Timeout for screen black-out or power-off during printing"
+msgstr ""
 
 msgid "Total:"
 msgstr "Total:"
@@ -760,8 +880,8 @@ msgstr "Total:"
 msgid "Unknown Heater"
 msgstr "Okänt värmeelement"
 
-msgid "Unknown screw position"
-msgstr "Okänd skruvposition"
+msgid "Unknown security type"
+msgstr ""
 
 msgid "Unload"
 msgstr "Lasta av"
@@ -784,8 +904,8 @@ msgstr "Uppdaterar"
 msgid "Uploaded"
 msgstr "Uppladdad"
 
-msgid "Warning"
-msgstr "Varning"
+msgid "Useful for un-responsive touchscreens"
+msgstr ""
 
 msgid "WebRTC is not supported by the backend trying Stream"
 msgstr "WebRTC stöds inte av backend provar Stream"
@@ -816,8 +936,10 @@ msgid_plural "commits"
 msgstr[0] "commit"
 msgstr[1] "commits"
 
-msgid "dBm"
-msgstr "dBm"
+msgid "day"
+msgid_plural "days"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "hour"
 msgid_plural "hours"
@@ -846,6 +968,54 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#~ msgid "Ended official support in June 2023"
+#~ msgstr "Avslutade officiellt stöd i juni 2023"
+
+#~ msgid "Hidden"
+#~ msgstr "Dold"
+
+#~ msgid "KlipperScreen will drop support in June 2024"
+#~ msgstr "KlipperScreen kommer att ta bort stödet i juni 2024"
+
+#~ msgid "Print Time"
+#~ msgstr "Utskriftstid"
+
+#~ msgid "Starting WiFi Association"
+#~ msgstr "Startar WiFi Association"
+
+#~ msgid "Warning"
+#~ msgstr "Varning"
+
+#~ msgid "dBm"
+#~ msgstr "dBm"
+
+#~ msgid "Deselect"
+#~ msgstr "Avmarkera"
+
+#~ msgid "Select"
+#~ msgstr "Välj"
+
+#~ msgid "Bed screw configuration:"
+#~ msgstr "Konfiguration bädd skruvar:"
+
+#~ msgid ""
+#~ "Not supported for auto-detection, it needs to be configured in "
+#~ "klipperscreen.conf"
+#~ msgstr ""
+#~ "Stöds inte för automatisk upptäckt, den måste konfigureras i "
+#~ "klipperscreen.conf"
+
+#~ msgid "Unknown screw position"
+#~ msgstr "Okänd skruvposition"
+
+#~ msgid "Max Acceleration to Deceleration"
+#~ msgstr "Max acceleration till inbromsning"
 
 #~ msgid "Continue"
 #~ msgstr "Fortsätt"

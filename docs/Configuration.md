@@ -57,15 +57,9 @@ moonraker_port: 7125
 # Define the z_babystep intervals in a CSV list. Currently only 2 are supported, the last value is default
 # z_babystep_values: 0.01, 0.05
 
-# Override the movement speed and set a specific for this printer.
-# These setting overrides the settings configured in the UI. If specified,
-# the values configured in the UI will not be used.
-# this is not recommended and may be removed in the future, use the ui settings
-# move_speed_xy: 500
-# move_speed_z: 300
-
+# For the 'Power on' button on the splash screen:
 # Define one or more moonraker power devices that turn on this printer (CSV list)
-# Default is the printer name
+# By Default it tries to match the printer name defined in this section header to the moonraker power device name.
 # power_devices: example1, example2
 
 # Define what items should be shown in titlebar besides the extruder and bed
@@ -78,20 +72,14 @@ moonraker_port: 7125
 # titlebar_name_type: None
 
 # Z probe calibrate position
-# By default is the middle of the bed
+# By default it tries to guess the correct location
+# it will try using zero reference position, safe_z, mesh midddle, middle of axis length, etc
 # example:
 # calibrate_x_position: 100
 # calibrate_y_position: 100
 
-
-# Bed Screws
-# define the screw positons required for odd number of screws in a comma separated list (CSV)
-# possible values are: bl, br, bm, fl, fr, fm, lm, rm, center
-# they correspond to back-left, back-right, back-middle, front-left, front-right, front-middle, left-middle, right-middle
-# example:
-# screw_positions: bl, br, fm
-
 # Rotation is useful if the screen is not directly in front of the machine.
+# It will affect the bed mesh visualization.
 # Valid values are 0 90 180 270
 # screw_rotation: 0
 
@@ -155,52 +143,61 @@ printer is idle. The __print menu is accessible from the printing status page.
 A menu item is configured as follows:
 ```{ .ini .no-copy }
 [menu __main my_menu_item]
-# To build a sub-menu of this menu item, you would next use [menu __main my_menu_item sub_menu_item]
 name: Item Name
-# Optional Parameters
+#   To build a sub-menu of this menu item, you would next define [menu __main my_menu_item sub_menu_item]
 #
-# Icon name to be used, it can be any image in the directory:
-# KlipperScreen/styles/{theme}/images/ where {theme} is your current theme
-# Supported formats svg or png
-icon: home
-# Icon style, defined as "button.mycolor4" (for example) in the theme css
-style: mycolor4
-# Panel from the panels listed below
-panel: preheat
-# Moonraker method to call when the item is selected
-method: printer.gcode.script
-# Parameters that would be passed with the method above
-params: {"script":"G28 X"}
-# Enable allows hiding of a menu if the condition is false. This statement is evaluated in Jinja2
-#   Available variables are listed below.
-enable: {{ printer.power_devices.count > 0 }}
+#   --- The following items are optional ---
+#
+# icon: home
+#   Icon name to be used, it can be any image in the directory:
+#   KlipperScreen/styles/{theme}/images/ where {theme} is your current theme
+#   Supported formats svg or png
+#
+# style: mycolor4
+#   Icon style, defined as "button.mycolor4" (for example) in the theme css
+#
+# panel: preheat
+#   Panel from the panels folder in the KlipperScreen folder
+#
+# enable: {{ 'screws_tilt_adjust' in printer.config_sections and printer.power_devices.count > 0 }}
+#   Enable allows hiding of a menu if the condition is false. (evaluated with Jinja2)
+#   Available variables are listed in the next section.
+#
+#   --- The items below do not work if you define a panel to be loaded ---
+#
+# method: printer.gcode.script
+#   Moonraker method to call when the item is selected, you will need params below
+#   the most common is is printer.gcode.script check out other methods in moonraker documentation:
+#   https://moonraker.readthedocs.io/en/latest/web_api/#run-a-gcode
+#
+# params: {"script":"G28 X"}
+#   Parameters that would be passed with the method above
+#
+# confirm: 'Are you sure?'
+#   If present this option will give you a confirmation prompt with the text above.
+#   It's recommended that you use a Macro-prompt instead of this option,
+#   as the Macro-prompt will also be shown on other interfaces, and it's more flexible.
+#   Macro-prompts are described in: https://klipperscreen.github.io/KlipperScreen/macros/#prompts
 ```
-Available panels are listed here: [docs/panels.md](Panels.md)
 
-Certain variables are available for conditional testing of the enable statement:
+
+Variables to conditionally test the enable statement:
 ```{ .yaml .no-copy }
+# Configured in Moonraker
+moonraker.power_devices.count # Number of power devices
+moonraker.cameras.count # Number of cameras
+moonraker.spoolman # Has spoolman
+
+# Printer specific
+printer.pause_resume.is_paused # Printing job is paused
 printer.extruders.count # Number of extruders
-printer.temperature_devices.count # Number of temperature related devices that are not extruders
+printer.temperature_devices.count # Number of temperature related devices (not extruders)
 printer.fans.count # Number of fans
-printer.power_devices.count # Number of power devices configured in Moonraker
+printer.output_pins.count # Number of pins configured
 printer.gcode_macros.count # Number of gcode macros
 printer.gcode_macros.list # List of names of the gcode macros
-printer.output_pins.count # Number of fans
-
-printer.bltouch # Available if bltouch section defined in config
-printer.probe # Available if probe section defined in config
-printer.bed_mesh # Available if bed_mesh section defined in config
-printer.quad_gantry_level # Available if quad_gantry_level section defined in config
-printer.z_tilt # Available if z_tilt section defined in config
-
-printer.firmware_retraction # True if defined in config
-printer.input_shaper # True if defined in config
-printer.bed_screws # True if defined in config
-printer.screws_tilt_adjust # True if defined in config
-
-printer.idle_timeout # Idle timeout section
-printer.pause_resume # Pause resume section of Klipper
-
+printer.leds.count # Number of leds
+printer.config_sections # Array of section headers of Klipper config (printer.cfg)
 ```
 
 
@@ -209,11 +206,6 @@ A sample configuration of a main menu would be as follows:
 [menu __main homing]
 name: Homing
 icon: home
-
-[menu __main preheat]
-name: Preheat
-icon: heat-up
-panel: preheat
 
 [menu __main homing homeall]
 name: Home All
@@ -228,6 +220,10 @@ method: printer.gcode.script
 params: {"script":"MY_MACRO"}
 enable: {{ 'MY_MACRO' in printer.gcode_macros.list }}
 
+[menu __main preheat]
+name: Preheat
+icon: heat-up
+panel: preheat
 ```
 
 ## KlipperScreen behaviour towards configuration
@@ -245,7 +241,7 @@ Default Preheat options will be discarded if a custom preheat is found.
 If include files are defined then, they will be merged first.
 
 The default config is included here: (do not edit use as reference)
-_${KlipperScreen_Directory}/ks_includes/default.conf_
+_${KlipperScreen_Directory}/config/defaults.conf_
 
 *Do not* copy the entire default.conf file, just configure the settings needed.
 
