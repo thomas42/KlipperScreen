@@ -1343,6 +1343,7 @@ def main():
         raise RuntimeError from e
     api_server = APIServer(win, port=int(args.api_port))
     api_server.start()
+    win.connect("destroy", lambda *_: api_server.stop())
     win.connect("destroy", Gtk.main_quit)
     win.show_all()
     Gtk.main()
