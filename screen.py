@@ -33,6 +33,7 @@ from ks_includes.widgets.lockscreen import LockScreen
 from ks_includes.widgets.screensaver import ScreenSaver
 from ks_includes.config import KlipperScreenConfig
 from panels.base_panel import BasePanel
+from ks_includes.api_server import APIServer
 
 
 logging.getLogger("urllib3").setLevel(logging.WARNING)
@@ -1324,6 +1325,10 @@ def main():
         "-m", "--monitor", default="0", metavar='<monitor>',
         help="Number of the monitor, that will show Klipperscreen (default: 0)"
     )
+    parser.add_argument(
+        "--api-port", default="3344", metavar='<port>',
+        help="Port for the simple API server"
+    )
     args = parser.parse_args()
 
     functions.setup_logging(os.path.normpath(os.path.expanduser(args.logfile)))
@@ -1336,6 +1341,9 @@ def main():
     except Exception as e:
         logging.exception(f"Failed to initialize window\n{e}\n\n{traceback.format_exc()}")
         raise RuntimeError from e
+    api_server = APIServer(win, port=int(args.api_port))
+    api_server.start()
+    win.connect("destroy", lambda *_: api_server.stop())
     win.connect("destroy", Gtk.main_quit)
     win.show_all()
     Gtk.main()
